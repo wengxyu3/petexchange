@@ -12,7 +12,7 @@ public class OwnerList {
 	File f1 = new File("");
 
 	public OwnerList(String filename) {
-		f1 = new File("/Users/cameronxu/Documents/Java/" + filename + ".txt");
+		f1 = new File(filename + ".txt");
 		try {
 			Scanner fr1 = new Scanner(f1);
 			while (fr1.hasNextLine())
@@ -28,7 +28,7 @@ public class OwnerList {
 		}
 	}
 
-	public void Add(String name, String password) {
+	public void Register(String name, String password) {
 		if (CheckSafe(name)) {
 			try {
 				Account newowner = new Account(name, password, true);
@@ -40,6 +40,7 @@ public class OwnerList {
 				PrintWriter fo1 = new PrintWriter(fw1);
 				fo1.println(name);
 				fo1.close();
+				owners.add(name);
 			} catch (IOException e) {
 				// TODO Leave alone
 			}
@@ -49,8 +50,9 @@ public class OwnerList {
 
 	public boolean CheckSafe(String ownername) {
 		for (int i = 0; i < owners.size(); i++)
-			if (ownername.equals(owners.get(i)))
-				return false;
+			{System.out.println(owners.get(i));
+			if (ownername.toUpperCase().equals(owners.get(i).toUpperCase()))
+				return false;}
 		return true;
 	}
 
