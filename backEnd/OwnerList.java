@@ -45,6 +45,7 @@ public class OwnerList {
 				// TODO Leave alone
 			}
 		} else
+			throw(backEnd.fileExistsException);
 			System.out.println("Name already exists");
 	}
 
