@@ -28,7 +28,7 @@ public class OwnerList {
 		}
 	}
 
-	public void Register(String name, String password) {
+	public void Register(String name, String password) throws fileExistsException {
 		if (CheckSafe(name)) {
 			try {
 				Account newowner = new Account(name, password, true);
@@ -45,7 +45,7 @@ public class OwnerList {
 				// TODO Leave alone
 			}
 		} else
-			throw(backEnd.fileExistsException);
+			throw (new fileExistsException());
 			System.out.println("Name already exists");
 	}
 
