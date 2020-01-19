@@ -31,10 +31,6 @@ public class MainClass extends Application {
 	}
 
 	OwnerList ownerList = new OwnerList("");
-//	ArrayList<TextFieldText> textFieldTexts = new ArrayList<TextFieldText>();
-//	public void updateTextFields(Event e) {
-//
-//	}
 	ArrayList<Account> accounts = new ArrayList<>();
 
 	private void createAccountHandle(Event e, String username, String password) {
@@ -132,14 +128,3 @@ public class MainClass extends Application {
 		primaryStage.show(); // Display the stage
 	}
 }
-
-//class TextFieldText {
-//	TextField textField;
-//	String text;
-//	String textFieldName;
-//	TextFieldText(TextField textField1, String text1) {
-//		textField = textField1;
-//		text = text1;
-//		textFieldName = textField.getId();
-//	}
-//}
