@@ -1,22 +1,21 @@
-package backEnd;
-
+package petexchange;
+import java.util.ArrayList;
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Scanner;
-
-public class OwnerList {
-	private ArrayList<Account> owners = new ArrayList<>();
+import java.io.FileWriter;
+public class OwnerList{
+	private ArrayList<String> OwnerName = new ArrayList<String>();
 	File f1 = new File("");
-
-	public OwnerList(String filename) {
-		f1 = new File("/Users/cameronxu/Documents/Java/" + filename + ".txt");
+	OwnerList(String filename) {
+		f1 = new File("/Users/cameronxu/Documents/Java/"+filename+".txt");
 		try {
 			Scanner fr1 = new Scanner(f1);
-			while (fr1.hasNextLine())
+			while(fr1.hasNextLine()) {
 				OwnerName.add(fr1.nextLine());
+			}
 			fr1.close();
 		} catch (IOException e) {
 			try {
@@ -24,37 +23,34 @@ public class OwnerList {
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
-			}
+		}
 		}
 	}
-
-	public void Add(String name, String password) {
-		if (CheckSafe(name)) {
-			try {
-				Account newowner = new Account(name, password, true);
-			} catch (PasswordMismatchException e) {
-				// TODO Auto-generated catch block
-			}
-			try {
-				FileWriter fw1 = new FileWriter(f1, true);
-				PrintWriter fo1 = new PrintWriter(fw1);
-				fo1.println(name);
-				fo1.close();
-			} catch (IOException e) {
-				// TODO Leave alone
-			}
-		} else
-			System.out.println("Name already exists");
+	public Object[] getNames(){
+		return OwnerName.toArray();
 	}
-
 	public boolean CheckSafe(String ownername) {
-		for (int i = 0; i < owners.size(); i++)
-			if (ownername.equals(owners.get(i).getUsername()))
-				return false;
-		return true;
+		if(OwnerName.contains(ownername)) {
+			return false;
+		}
+		else {
+			return true;
+		}
 	}
-
-	public Object[] getNames() {
-		return owners.toArray();
+	public void Add(String name) {
+		if(CheckSafe(name)) {
+	//	TODO	Owner newowner = new Owner(name, password, true);
+		try {
+			FileWriter fw1 = new FileWriter(f1, true);
+			PrintWriter fo1 = new PrintWriter(fw1);
+			fo1.println(name);
+			fo1.close();
+		} catch (IOException e) {
+			// TODO Leave alone
+		}
+		}
+		else {
+			System.out.println("Name already exists");
+		}
 	}
 }
