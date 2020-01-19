@@ -12,6 +12,16 @@ public class Pet {
 	String description;
 	JSONObject jsonObj = new JSONObject();
 
+	Pet() {
+
+	}
+
+	Pet(JSONObject input) {
+		name = (String) input.get("name");
+		species = (String) input.get("species");
+		description = (String) input.get("description");
+	}
+
 	private void editDescription(String text) {
 		description = text;
 	}
