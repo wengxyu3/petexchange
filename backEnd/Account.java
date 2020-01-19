@@ -163,7 +163,7 @@ public class Account {
 		save();
 	}
 
-	void editZipCode(Long input) {
+	void editZipCode(int input) {
 		zipCode = input;
 		save();
 	}
