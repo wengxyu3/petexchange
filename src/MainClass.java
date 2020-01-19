@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import backEnd.Account;
 import backEnd.FileExistsException;
 import backEnd.OwnerList;
+import backEnd.PasswordMismatchException;
 import javafx.application.Application;
 import javafx.event.Event;
 import javafx.geometry.Insets;
@@ -68,15 +69,10 @@ public class MainClass extends Application {
 	}
 
 	private void loginHandle(Event e, String username, String password) {
-		boolean doesMatch = false;
-		for (int i = 0; i < accounts.size(); i++)
-			if (accounts.get(i).getUsername().equals(username))
-				if (accounts.get(i).getPassword().equals(password)) {
-					doesMatch = true;
-					break;
-				}
-		if (!doesMatch) {
-			// Create error message
+		try {
+			Account loginAccount = new Account(username, password, false);
+			// TODO progress to next scene
+		} catch (PasswordMismatchException e1) {
 			BorderPane errorPane = new BorderPane();
 			Scene errorScene = new Scene(errorPane);
 			Stage errorStage = new Stage();
@@ -87,13 +83,25 @@ public class MainClass extends Application {
 			errorPane.setTop(errorText);
 			errorPane.setCenter(errorCloseButton);
 			errorStage.setScene(errorScene);
-			errorCloseButton.setOnAction(e1 -> {
+			errorCloseButton.setOnAction(e2 -> {
 				errorStage.close();
 			});
 			errorStage.show();
-		} else {
-			// TODO Continue to next application scene
 		}
+		/*
+		 * boolean doesMatch = false; for (int i = 0; i < accounts.size(); i++) if
+		 * (accounts.get(i).getUsername().equals(username)) if
+		 * (accounts.get(i).getPassword().equals(password)) { doesMatch = true; break; }
+		 * if (!doesMatch) { // Create error message BorderPane errorPane = new
+		 * BorderPane(); Scene errorScene = new Scene(errorPane); Stage errorStage = new
+		 * Stage(); Pane errorTextPane = new Pane(); Text errorText = new Text(50, 50,
+		 * "Username/Password does not match.");
+		 * errorTextPane.getChildren().add(errorText); Button errorCloseButton = new
+		 * Button("OK"); errorPane.setTop(errorText);
+		 * errorPane.setCenter(errorCloseButton); errorStage.setScene(errorScene);
+		 * errorCloseButton.setOnAction(e1 -> { errorStage.close(); });
+		 * errorStage.show(); } else { // TODO Continue to next application scene }
+		 */
 	}
 
 	@Override // Override the start method in the Application class
