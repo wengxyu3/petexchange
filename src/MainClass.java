@@ -47,7 +47,6 @@ public class MainClass extends Application {
 		newAccountConfirmationStage.setScene(newAccountConfirmationScene);
 
 		isAccountCreatedText.setText("Account Created!");
-		boolean isTaken = false;
 		try {
 			ownerList.Register(username, password);
 		} catch (FileExistsException e1) {
@@ -73,12 +72,15 @@ public class MainClass extends Application {
 			Text errorText = new Text(50, 50, "Username/Password does not match.");
 			errorTextPane.getChildren().add(errorText);
 			Button errorCloseButton = new Button("OK");
+
 			errorPane.setTop(errorText);
 			errorPane.setCenter(errorCloseButton);
 			errorStage.setScene(errorScene);
+
 			errorCloseButton.setOnAction(e2 -> {
 				errorStage.close();
 			});
+
 			errorStage.show();
 		}
 	}
