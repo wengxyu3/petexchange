@@ -8,11 +8,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class OwnerList {
-	private ArrayList<Account> owners = new ArrayList<>();
+	private ArrayList<String> owners = new ArrayList<>();
 	File f1 = new File("");
 
 	public OwnerList(String filename) {
-		f1 = new File("/Users/cameronxu/Documents/Java/" + filename + ".txt");
+		f1 = new File(filename + ".txt");
 		try {
 			Scanner fr1 = new Scanner(f1);
 			while (fr1.hasNextLine())
@@ -28,7 +28,7 @@ public class OwnerList {
 		}
 	}
 
-	public void Add(String name, String password) {
+	public void Register(String name, String password) throws fileExistsException {
 		if (CheckSafe(name)) {
 			try {
 				Account newowner = new Account(name, password, true);
@@ -40,17 +40,20 @@ public class OwnerList {
 				PrintWriter fo1 = new PrintWriter(fw1);
 				fo1.println(name);
 				fo1.close();
+				owners.add(name);
 			} catch (IOException e) {
 				// TODO Leave alone
 			}
 		} else
+			throw (new fileExistsException());
 			System.out.println("Name already exists");
 	}
 
 	public boolean CheckSafe(String ownername) {
 		for (int i = 0; i < owners.size(); i++)
-			if (ownername.equals(owners.get(i).getUsername()))
-				return false;
+			{System.out.println(owners.get(i));
+			if (ownername.toUpperCase().equals(owners.get(i).toUpperCase()))
+				return false;}
 		return true;
 	}
 

@@ -6,7 +6,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -14,20 +13,20 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 public class Account {
-	private String file = "";
+	String file = "C:\\";
 
-	private JSONObject jsonObj;
-	private JSONParser jsonParse;
-	private String username;
-	private String password;
-	private String description;
-	private String email;
-	private String adress;
-	private String city;
-	private String state;
-	private int zipCode;
-	private long phoneNumber;
-	private long creditNumber;
+	JSONObject jsonObj;
+	JSONParser jsonParse;
+	String username;
+	String password;
+	String description;
+	String email;
+	String adress;
+	String city;
+	String state;
+	int zipCode;
+	long phoneNumber;
+	long creditNumber;
 	ArrayList<Pet> pets = new ArrayList<>();
 	ArrayList<Request> requests = new ArrayList<>();
 	ArrayList<Review> ratings = new ArrayList<>();
@@ -55,6 +54,7 @@ public class Account {
 			}
 			if (!password.equals(password1))
 				throw new PasswordMismatchException();
+<<<<<<< HEAD
 
 			try (Reader reader = new FileReader(file)) {
 				jsonObj = (JSONObject) jsonParse.parse(reader);
@@ -76,6 +76,8 @@ public class Account {
 			} catch (ParseException e) {
 
 			}
+=======
+>>>>>>> branch 'master' of https://github.com/wengxyu3/petexchange
 		}
 	}
 
