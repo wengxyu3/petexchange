@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class OwnerList {
-	private ArrayList<Account> owners = new ArrayList<>();
+	private ArrayList<String> owners = new ArrayList<>();
 	File f1 = new File("");
 
 	public OwnerList(String filename) {
@@ -49,7 +49,7 @@ public class OwnerList {
 
 	public boolean CheckSafe(String ownername) {
 		for (int i = 0; i < owners.size(); i++)
-			if (ownername.equals(owners.get(i).getUsername()))
+			if (ownername.equals(owners.get(i)))
 				return false;
 		return true;
 	}
