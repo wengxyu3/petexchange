@@ -28,6 +28,19 @@ public class OwnerList {
 		}
 	}
 
+	public boolean CheckSafe(String ownername) {
+		for (int i = 0; i < owners.size(); i++) {
+			System.out.println(owners.get(i));
+			if (ownername.toUpperCase().equals(owners.get(i).toUpperCase()))
+				return false;
+		}
+		return true;
+	}
+
+	public Object[] getNames() {
+		return owners.toArray();
+	}
+
 	public void Register(String name, String password) throws FileExistsException {
 		if (CheckSafe(name)) {
 			try {
@@ -45,19 +58,6 @@ public class OwnerList {
 				// TODO Leave alone
 			}
 		} else
-			throw (new FileExistsException());
-			System.out.println("Name already exists");
-	}
-
-	public boolean CheckSafe(String ownername) {
-		for (int i = 0; i < owners.size(); i++)
-			{System.out.println(owners.get(i));
-			if (ownername.toUpperCase().equals(owners.get(i).toUpperCase()))
-				return false;}
-		return true;
-	}
-
-	public Object[] getNames() {
-		return owners.toArray();
+			throw new FileExistsException();
 	}
 }

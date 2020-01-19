@@ -1,9 +1,10 @@
 package src;
+
 import java.util.ArrayList;
 
 import backEnd.Account;
+import backEnd.FileExistsException;
 import backEnd.OwnerList;
-import backEnd.PasswordMismatchException;
 import javafx.application.Application;
 import javafx.event.Event;
 import javafx.geometry.Insets;
@@ -50,18 +51,11 @@ public class MainClass extends Application {
 
 		isAccountCreatedText.setText("Account Created!");
 		boolean isTaken = false;
-		for (int i = 0; i < accounts.size(); i++) {
-			if (accounts.get(i).getUsername().equals(username))
-				isAccountCreatedText.setText("This username is already taken.");
-			isTaken = true;
+		try {
+			ownerList.Register(username, password);
+		} catch (FileExistsException e1) {
+			isAccountCreatedText.setText("This username is already taken.");
 		}
-		if (!isTaken)
-			try {
-				accounts.add(new Account(username, password, true));
-			} catch (PasswordMismatchException e2) {
-				// TODO Auto-generated catch block
-				e2.printStackTrace();
-			}
 		/*
 		 * if(ownerList.CheckSafe(username)) { ownerList.Add(username); } else {
 		 * isAccountCreatedText.setText("This username is already taken."); }
