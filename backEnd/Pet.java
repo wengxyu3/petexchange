@@ -54,6 +54,10 @@ public class Pet {
 		species = text;
 	}
 
+	protected String getName() {
+		return name;
+	}
+
 	JSONObject returnJsonObj() {
 		jsonObj.put("name", name);
 		jsonObj.put("description", description);

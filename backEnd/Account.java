@@ -63,7 +63,7 @@ public class Account {
 				adress = (String) jsonObj.get("adress");
 				city = (String) jsonObj.get("city");
 				state = (String) jsonObj.get("state");
-				zipCode = (Integer) jsonObj.get("zipCode");
+				zipCode = Math.toIntExact((Long) jsonObj.get("zipCode"));
 				phoneNumber = (Long) jsonObj.get("phoneNumber");
 				creditNumber = (Long) jsonObj.get("creditNumber");
 
@@ -103,23 +103,69 @@ public class Account {
 		pets.remove(pet1);
 	}
 
+	void editAdress(String text) {
+		adress = text;
+		save();
+	}
+
+	void editCity(String text) {
+		city = text;
+		save();
+	}
+
+	void editCreditNumber(Long input) {
+		creditNumber = input;
+		save();
+	}
+
 	void editDescription(String text) {
 		description = text;
+		save();
+	}
+
+	void editEmail(String text) {
+		email = text;
+		save();
 	}
 
 	void editPassword(String text) {
 		password = text;
+		save();
 	}
 
 	// void editPet(int index, PetString pString, String text) {
 //
 //	}
-	void editPet(int index, String text1, String text2, String text3) {
+	void editPet(String name, String text2, String text3) {
+		for (int i = 0; i < pets.size(); i++)
+			if (name.equals(pets.get(i).getName())) {
+				editPetIndex(i, name, text2, text3);
+				break;
+			}
+	}
+
+	void editPetIndex(int index, String text1, String text2, String text3) {
 		pets.get(index).editHandler(text1, text2, text3);
+	}
+
+	void editPhoneNumber(Long input) {
+		phoneNumber = input;
+		save();
+	}
+
+	void editState(String text) {
+		state = text;
+		save();
 	}
 
 	void editUsername(String text) {
 		username = text;
+		save();
+	}
+
+	void editZipCode(Long input) {
+		zipCode = input;
+		save();
 	}
 
 	float getAverageRating() {
@@ -127,6 +173,10 @@ public class Account {
 		for (int i = 0; i < ratings.size(); i++)
 			sum = sum + ratings.get(i).getRating();
 		return sum / ratings.size();
+	}
+
+	public String getDescription() {
+		return description;
 	}
 
 	public String getPassword() {
