@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -13,20 +14,20 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 public class Account {
-	String file = "C:\\";
+	private String file = "";
 
-	JSONObject jsonObj;
-	JSONParser jsonParse;
-	String username;
-	String password;
-	String description;
-	String email;
-	String adress;
-	String city;
-	String state;
-	int zipCode;
-	long phoneNumber;
-	long creditNumber;
+	private JSONObject jsonObj;
+	private JSONParser jsonParse;
+	private String username;
+	private String password;
+	private String description;
+	private String email;
+	private String adress;
+	private String city;
+	private String state;
+	private int zipCode;
+	private long phoneNumber;
+	private long creditNumber;
 	ArrayList<Pet> pets = new ArrayList<>();
 	ArrayList<Request> requests = new ArrayList<>();
 	ArrayList<Review> ratings = new ArrayList<>();
@@ -54,6 +55,27 @@ public class Account {
 			}
 			if (!password.equals(password1))
 				throw new PasswordMismatchException();
+
+			try (Reader reader = new FileReader(file)) {
+				jsonObj = (JSONObject) jsonParse.parse(reader);
+				description = (String) jsonObj.get("description");
+				email = (String) jsonObj.get("email");
+				adress = (String) jsonObj.get("adress");
+				city = (String) jsonObj.get("city");
+				state = (String) jsonObj.get("state");
+				zipCode = (Integer) jsonObj.get("zipCode");
+				phoneNumber = (Long) jsonObj.get("phoneNumber");
+				creditNumber = (Long) jsonObj.get("creditNumber");
+
+				JSONArray petArray = (JSONArray) jsonObj.get("pets");
+				Iterator<JSONObject> petIterator = petArray.iterator();
+				while (petIterator.hasNext())
+					pets.add(new Pet(petIterator.next()));
+			} catch (IOException e) {
+
+			} catch (ParseException e) {
+
+			}
 		}
 	}
 
