@@ -57,10 +57,7 @@ public class MainClass extends Application {
 		} catch (FileExistsException e1) {
 			isAccountCreatedText.setText("This username is already taken.");
 		}
-		/*
-		 * if(ownerList.CheckSafe(username)) { ownerList.Add(username); } else {
-		 * isAccountCreatedText.setText("This username is already taken."); }
-		 */
+
 		newAccountConfirmationStage.show();
 		newAccountConfirmationCloseButton.setOnAction(e1 -> {
 
@@ -88,20 +85,6 @@ public class MainClass extends Application {
 			});
 			errorStage.show();
 		}
-		/*
-		 * boolean doesMatch = false; for (int i = 0; i < accounts.size(); i++) if
-		 * (accounts.get(i).getUsername().equals(username)) if
-		 * (accounts.get(i).getPassword().equals(password)) { doesMatch = true; break; }
-		 * if (!doesMatch) { // Create error message BorderPane errorPane = new
-		 * BorderPane(); Scene errorScene = new Scene(errorPane); Stage errorStage = new
-		 * Stage(); Pane errorTextPane = new Pane(); Text errorText = new Text(50, 50,
-		 * "Username/Password does not match.");
-		 * errorTextPane.getChildren().add(errorText); Button errorCloseButton = new
-		 * Button("OK"); errorPane.setTop(errorText);
-		 * errorPane.setCenter(errorCloseButton); errorStage.setScene(errorScene);
-		 * errorCloseButton.setOnAction(e1 -> { errorStage.close(); });
-		 * errorStage.show(); } else { // TODO Continue to next application scene }
-		 */
 	}
 
 	@Override // Override the start method in the Application class
