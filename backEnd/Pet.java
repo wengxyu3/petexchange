@@ -40,7 +40,7 @@ public class Pet {
 //			throw new NullPointerException();
 //		}
 //	}
-	void editHandler(String text1, String text2, String text3) {
+	protected void editHandler(String text1, String text2, String text3) {
 		editName(text1);
 		editSpecies(text2);
 		editDescription(text3);
@@ -54,8 +54,16 @@ public class Pet {
 		species = text;
 	}
 
-	protected String getName() {
+	public String getDescription() {
+		return description;
+	}
+
+	public String getName() {
 		return name;
+	}
+
+	public String getSpecies() {
+		return species;
 	}
 
 	JSONObject returnJsonObj() {
