@@ -84,24 +84,34 @@ public class Account {
 
 	}
 
+	void addPet() {
+		pets.add(new Pet());
+		save();
+	}
+
 	void addPet(Pet pet1) {
 		pets.add(pet1);
+		save();
 	}
 
 	void addRating(Review rating) {
 		ratings.add(rating);
+		save();
 	}
 
 	void addRequest(Pet pet1) {
 		requests.add(new Request(pet1));
+		save();
 	}
 
 	void addRequest(Pet[] pets) {
 		requests.add(new Request(pets));
+		save();
 	}
 
 	void deletePed(Pet pet1) {
 		pets.remove(pet1);
+		save();
 	}
 
 	void editAdress(String text) {
@@ -143,6 +153,7 @@ public class Account {
 				editPetIndex(i, name, text2, text3);
 				break;
 			}
+		save();
 	}
 
 	void editPetIndex(int index, String text1, String text2, String text3) {
