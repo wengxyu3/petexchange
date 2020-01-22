@@ -153,11 +153,11 @@ public class Account {
 				editPetIndex(i, name, text2, text3);
 				break;
 			}
-		save();
 	}
 
 	void editPetIndex(int index, String text1, String text2, String text3) {
 		pets.get(index).editHandler(text1, text2, text3);
+		save();
 	}
 
 	void editPhoneNumber(Long input) {
