@@ -169,6 +169,10 @@ public class Account {
 		save();
 	}
 
+	public String getAdress() {
+		return adress;
+	}
+
 	float getAverageRating() {
 		int sum = 0;
 		for (int i = 0; i < ratings.size(); i++)
@@ -176,20 +180,50 @@ public class Account {
 		return sum / ratings.size();
 	}
 
+	public String getCity() {
+		return city;
+	}
+
+	public long getCreditNumber() {
+		return creditNumber;
+	}
+
 	public String getDescription() {
 		return description;
+	}
+
+	public String getEmail() {
+		return email;
 	}
 
 	public String getPassword() {
 		return password;
 	}
 
+	public long getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public String getState() {
+		return state;
+	}
+
 	public String getUsername() {
 		return username;
 	}
 
+	public int getZipCode() {
+		return zipCode;
+	}
+
 	void removePet(int index) {
 		pets.remove(index);
+	}
+
+	void removePet(String name) {
+		for (int i = 0; i < pets.size(); i++)
+			if (pets.get(i).getName().equals(name))
+				pets.remove(i);
 	}
 
 	void save() {
