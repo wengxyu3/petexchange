@@ -38,6 +38,8 @@ public class Account {
 		case WINDOWS:
 			file = "C:\\" + username1;
 		case MAC: // TODO see what happens with MacOS file stuff
+			String home1 = System.getProperty("user.home");
+			file = home1;
 		default:
 			// TODO add default handler
 			break;
