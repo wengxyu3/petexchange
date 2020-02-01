@@ -109,7 +109,7 @@ public class Account {
 		save();
 	}
 
-	void deletePed(Pet pet1) {
+	void deletePet(Pet pet1) {
 		pets.remove(pet1);
 		save();
 	}
