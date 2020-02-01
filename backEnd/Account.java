@@ -34,7 +34,14 @@ public class Account {
 	private ArrayList<Review> ratings = new ArrayList<>();
 
 	public Account(String username1, String password1, boolean isNewAccount) throws PasswordMismatchException {
-		file = "C:\\" + username1;
+		switch (OSUtility.getOS()) {
+		case WINDOWS:
+			file = "C:\\" + username1;
+		case MAC: // TODO see what happens with MacOS file stuff
+		default:
+			// TODO add default handler
+			break;
+		}
 		if (isNewAccount) {
 			// Create new Account
 			jsonObj = new JSONObject();
