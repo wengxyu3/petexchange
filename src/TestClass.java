@@ -12,7 +12,7 @@ public class TestClass {
 			System.out.print(testAccount.getUsername());
 			System.out.print(testAccount.getPassword());
 
-			testAccount.editDescription("hi");
+			//testAccount.editDescription("hi");
 			System.out.print(testAccount.getDescription());
 		} catch (PasswordMismatchException e) {
 			System.out.print("password does not match");
