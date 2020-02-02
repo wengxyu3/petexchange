@@ -12,7 +12,16 @@ public class OwnerList {
 	File f1 = new File("");
 
 	public OwnerList(String filename) {
-		f1 = new File(filename + ".txt");
+		switch (OSUtility.getOS()) {
+		case WINDOWS:
+			f1 = new File(filename + ".txt");
+		case MAC: // TODO see what happens with MacOS file stuff
+			f1 = new File(filename + ".txt");
+		default:
+			// TODO add default handler
+			break;
+		}
+
 		try {
 			Scanner fr1 = new Scanner(f1);
 			while (fr1.hasNextLine())
