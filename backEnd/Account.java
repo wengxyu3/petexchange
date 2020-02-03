@@ -33,13 +33,20 @@ public class Account {
 	private ArrayList<Request> requests = new ArrayList<>();
 	private ArrayList<Review> ratings = new ArrayList<>();
 
+	Account(String password1, File file1) throws PasswordMismatchException {
+		file = file1.getPath();
+		loginHandler(password1);
+	}
+
 	public Account(String username1, String password1, boolean isNewAccount) throws PasswordMismatchException {
 		switch (OSUtility.getOS()) {
 		case WINDOWS:
 			file = "C:\\" + username1;
+			break;
 		case MAC: // TODO see what happens with MacOS file stuff
 			String home1 = System.getProperty("user.home");
-			file = home1;
+			file = home1 + "\\" + username1;
+			break;
 		default:
 			// TODO add default handler
 			break;
@@ -50,46 +57,9 @@ public class Account {
 			username = username1;
 			password = password1;
 			this.save();
-		} else {
+		} else
 			// Load Account
-			jsonParse = new JSONParser();
-			try (Reader reader = new FileReader(file)) {
-				jsonObj = (JSONObject) jsonParse.parse(reader);
-				username = (String) jsonObj.get("username");
-				password = (String) jsonObj.get("password");
-			} catch (IOException e) {
-
-			} catch (ParseException e) {
-
-			}
-			if (!password.equals(password1))
-				throw new PasswordMismatchException();
-
-			try (Reader reader = new FileReader(file)) {
-				jsonObj = (JSONObject) jsonParse.parse(reader);
-				description = (String) jsonObj.get("description");
-				email = (String) jsonObj.get("email");
-				adress = (String) jsonObj.get("adress");
-				city = (String) jsonObj.get("city");
-				state = (String) jsonObj.get("state");
-				zipCode = Math.toIntExact((Long) jsonObj.get("zipCode"));
-				phoneNumber = (Long) jsonObj.get("phoneNumber");
-				creditNumber = (Long) jsonObj.get("creditNumber");
-
-				JSONArray petArray = (JSONArray) jsonObj.get("pets");
-				Iterator<JSONObject> petIterator = petArray.iterator();
-				while (petIterator.hasNext())
-					pets.add(new Pet(petIterator.next()));
-			} catch (IOException e) {
-
-			} catch (ParseException e) {
-
-			}
-		}
-
-	}
-
-	Account(String username1, String password1, File file1) {
+			loginHandler(password1);
 
 	}
 
@@ -234,6 +204,48 @@ public class Account {
 
 	public int getZipCode() {
 		return zipCode;
+	}
+
+	private void loginHandler() {
+		jsonParse = new JSONParser();
+		try (Reader reader = new FileReader(file)) {
+			username = (String) jsonObj.get("username");
+			password = (String) jsonObj.get("password");
+			jsonObj = (JSONObject) jsonParse.parse(reader);
+			description = (String) jsonObj.get("description");
+			email = (String) jsonObj.get("email");
+			adress = (String) jsonObj.get("adress");
+			city = (String) jsonObj.get("city");
+			state = (String) jsonObj.get("state");
+			zipCode = Math.toIntExact((Long) jsonObj.get("zipCode"));
+			phoneNumber = (Long) jsonObj.get("phoneNumber");
+			creditNumber = (Long) jsonObj.get("creditNumber");
+
+			JSONArray petArray = (JSONArray) jsonObj.get("pets");
+			Iterator<JSONObject> petIterator = petArray.iterator();
+			while (petIterator.hasNext())
+				pets.add(new Pet(petIterator.next()));
+		} catch (IOException e) {
+
+		} catch (ParseException e) {
+
+		}
+	}
+
+	private void loginHandler(String inputPassword) throws PasswordMismatchException {
+		jsonParse = new JSONParser();
+		try (Reader reader = new FileReader(file)) {
+			jsonObj = (JSONObject) jsonParse.parse(reader);
+			username = (String) jsonObj.get("username");
+			password = (String) jsonObj.get("password");
+			if (!inputPassword.equals(password))
+				throw new PasswordMismatchException();
+			loginHandler();
+		} catch (IOException e) {
+
+		} catch (ParseException e) {
+
+		}
 	}
 
 	void removePet(int index) {
