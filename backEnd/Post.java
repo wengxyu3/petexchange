@@ -3,7 +3,7 @@ package backEnd;
 import java.time.LocalDateTime;
 
 public class Post {
-	private long id;
+	private int id;
 	private String username;
 	private String message;
 	private boolean deleteFlag;
@@ -17,23 +17,23 @@ public class Post {
 		deleteFlag = false;
 	}
 
-	protected LocalDateTime getDateTime() {
+	public LocalDateTime getDateTime() {
 		return dateTime;
 	}
 
-	protected boolean getDeleteFlag() {
+	public boolean getDeleteFlag() {
 		return deleteFlag;
 	}
 
-	protected long getId() {
+	public int getId() {
 		return id;
 	}
 
-	protected String getMessage() {
+	public String getMessage() {
 		return message;
 	}
 
-	protected String getUsername() {
+	public String getUsername() {
 		return username;
 	}
 

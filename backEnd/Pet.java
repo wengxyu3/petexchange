@@ -12,7 +12,7 @@ public class Pet {
 	String description;
 	JSONObject jsonObj = new JSONObject();
 
-	Pet() {
+	public Pet() {
 
 	}
 

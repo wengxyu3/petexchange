@@ -63,12 +63,12 @@ public class Account {
 
 	}
 
-	void addPet() {
+	public void addPet() {
 		pets.add(new Pet());
 		save();
 	}
 
-	void addPet(Pet pet1) {
+	public void addPet(Pet pet1) {
 		pets.add(pet1);
 		save();
 	}
@@ -88,7 +88,7 @@ public class Account {
 		save();
 	}
 
-	void deletePet(Pet pet1) {
+	public void deletePet(Pet pet1) {
 		pets.remove(pet1);
 		save();
 	}
