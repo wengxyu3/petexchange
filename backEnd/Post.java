@@ -3,38 +3,40 @@ package backEnd;
 import java.time.LocalDateTime;
 
 public class Post {
-	private long id;
-	private String username;
-	private String message;
-	private boolean deleteFlag;
-	private LocalDateTime dateTime;
-
+	private long postId;
+	private String postUsername;
+	private String postContent;
+	private boolean postDeleted;
+	private LocalDateTime postDate;
+	Post(){
+		
+	}
 	public Post(int id1, String username1, String message1, LocalDateTime dateTime1) {
-		id = id1;
-		username = username1;
-		message = message1;
-		dateTime = dateTime1;
-		deleteFlag = false;
+		postId = id1;
+		postUsername = username1;
+		postContent = message1;
+		postDate = dateTime1;
+		postDeleted = false;
 	}
 
 	protected LocalDateTime getDateTime() {
-		return dateTime;
+		return postDate;
 	}
 
 	protected boolean getDeleteFlag() {
-		return deleteFlag;
+		return postDeleted;
 	}
 
 	protected long getId() {
-		return id;
+		return postId;
 	}
 
 	protected String getMessage() {
-		return message;
+		return postContent;
 	}
 
 	protected String getUsername() {
-		return username;
+		return postUsername;
 	}
 
 	protected void replyPost() {
@@ -42,6 +44,7 @@ public class Post {
 	}
 
 	protected void setDeleteFlag(boolean toSet) {
-		deleteFlag = toSet;
+		postDeleted = toSet;
 	}
+	
 }
