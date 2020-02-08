@@ -11,7 +11,7 @@ public class Post {
 	Post(){
 		
 	}
-	public Post(int id1, String username1, String message1, LocalDateTime dateTime1) {
+	public Post(long id1, String username1, String message1, LocalDateTime dateTime1) {
 		postId = id1;
 		postUsername = username1;
 		postContent = message1;
@@ -42,9 +42,9 @@ public class Post {
 	protected void replyPost() {
 		// TODO
 	}
-
 	protected void setDeleteFlag(boolean toSet) {
 		postDeleted = toSet;
 	}
+	
 	
 }

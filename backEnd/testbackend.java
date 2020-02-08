@@ -1,11 +1,14 @@
 package backEnd;
+import java.time.LocalDateTime;
 public class testbackend{
 	public static void main(String[] args) {
+		LocalDateTime current = LocalDateTime.now();
 		bulletinboard j = new bulletinboard("testbulletinboard1");
-		j.addPost("abdddddd", "e");
-		j.addPost("bbbbb", "d");
-		j.addPost("aefw", "c");
-		j.addPost("a", "b");
-//		j.deletePost(12, "b");
+		j.displayPosts();
+		j.deletePost(5, "alice");
+		j.deletePost(6, "charles");
+		j.addPost(new Post(j.returnID(), "david", "test5", current));
+		j.displayPosts();
+		j.saveBulletin();
 	}
 }

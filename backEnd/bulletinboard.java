@@ -3,8 +3,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
+//import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 
 public class bulletinboard{
 	public int postnumber = 0;
@@ -65,10 +67,25 @@ public class bulletinboard{
 			}
 		}
 	}
-	public long returnID() {
-		return postcontents.size();
+	public void deletePost(long id, String username) {
+		for(int i =0; i< postcontents.size(); i++) {
+			if(postcontents.get(i).getId() == id){
+				if(postcontents.get(i).getUsername().equals(username)) {
+					postcontents.get(i).setDeleteFlag(true);
+				}
+				else {
+					System.out.println("Access Denied");
+				}
+			}
+		}
 	}
-	public void saveBulletin(String filename) {
+	public long returnID() {
+		if(postcontents.size()==0) {
+			return 1;
+		}
+		return postcontents.get(postcontents.size()-1).getId()+1;
+	}
+	public void saveBulletin() {
 		try {
 			PrintWriter pw1 = new PrintWriter(f1);
 			for(int i=0; i<postcontents.size(); i++) {
@@ -83,6 +100,19 @@ public class bulletinboard{
 		}
 		catch(Exception e) {
 			e.printStackTrace();
+		}
+	}
+	public ArrayList<Post> listPosts(){
+		return this.postcontents;
+	}
+	public void displayPosts(){
+		for(int i=0; i<postcontents.size(); i++) {
+			if(postcontents.get(i).getDeleteFlag() == false) {
+				System.out.println("ID: "+postcontents.get(i).getId());
+				System.out.println("Username: "+ postcontents.get(i).getUsername());
+				System.out.println("Message: "+ postcontents.get(i).getMessage());
+				System.out.println("Date: "+ postcontents.get(i).getDateTime());
+			}
 		}
 	}
 }
