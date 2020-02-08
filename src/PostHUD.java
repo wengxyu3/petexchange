@@ -1,16 +1,24 @@
-package backEnd;
+package src;
 
 import java.time.format.DateTimeFormatter;
 
+import backEnd.Post;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 
-public class PostHUD extends GridPane {
+public class PostHUD extends BorderPane {
 	Post post;
+	int displayIndex;
+	Pane parentPane;
 
-	public PostHUD(Post inputPost) {
+	PostHUD(Post inputPost, int indexInput, GridPane parentInput) {
 		super();
 		post = inputPost;
+		parentPane = parentInput;
+		displayIndex = indexInput;
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm");
 		/*
 		 * TextField dateTimeField = new
@@ -34,7 +42,15 @@ public class PostHUD extends GridPane {
 		postText.setEditable(false);
 		postText.setWrapText(true);
 
-		this.add(postText, 0, 0);
+		this.setCenter(postText);
+
+		Button deleteButton = new Button("Delete");
+		deleteButton.setOnAction(e -> {
+			// TODO fix this
+			parentPane.getChildren().remove(displayIndex);
+			System.out.print("deleted " + displayIndex);
+		});
+		this.setRight(deleteButton);
 
 	}
 }
