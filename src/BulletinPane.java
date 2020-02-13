@@ -16,16 +16,10 @@ public class BulletinPane extends BorderPane {
 	GridPane postPane;
 	ArrayList<PostHUD> postHUDs;
 
-	BulletinPane() {
+	BulletinPane(String username) {
 		// TODO replace with bullitenBoard stuff
 		postHUDs = new ArrayList<>();
 		postPane = new GridPane();
-
-		updateScene(new Post(0, "abc", "afdfsfds", LocalDateTime.now()));
-		updateScene(new Post(1, "cdf", "dfdsfdasfas", LocalDateTime.now()));
-
-//		for (int i = 0; i < posts.size(); i++)
-//			updateScene(posts.get(i));
 
 		ScrollPane postScrollPane = new ScrollPane();
 		postScrollPane.setContent(postPane);
@@ -34,7 +28,7 @@ public class BulletinPane extends BorderPane {
 		textAddField.setOnKeyPressed(e -> {
 			if (e.getCode() == KeyCode.ENTER) {
 				// TODO replace values with username/message
-				updateScene(new Post(postHUDs.size(), "a", textAddField.getText(), LocalDateTime.now()));
+				updateScene(new Post(postHUDs.size(), username, textAddField.getText(), LocalDateTime.now()));
 				textAddField.clear();
 			}
 		});
@@ -44,15 +38,8 @@ public class BulletinPane extends BorderPane {
 	}
 
 	void updateScene(Post input) {
-		// posts.add(input);
 		// creates new postHUD with displayIndex of the last postHUD
-		// TODO set the displayIndex to the index of the last VISIBLE postHUD
 		PostHUD postHUD1 = null;
-//		try {
-//			postHUD = new PostHUD(input, postHUDs.get(postHUDs.size() - 1).getDisplayIndex() + 1);
-//		} catch (Exception e) {
-//			postHUD = new PostHUD(input, 0);
-//		}
 		if (postHUDs.size() == 0)
 			postHUD1 = new PostHUD(input, 0);
 		else
