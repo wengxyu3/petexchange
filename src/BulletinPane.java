@@ -12,12 +12,13 @@ import javafx.scene.layout.GridPane;
 
 public class BulletinPane extends BorderPane {
 	// TODO replace this with BulletinBoard
-	ArrayList<Post> posts;
+	// ArrayList<Post> posts;
 	GridPane postPane;
+	ArrayList<PostHUD> postHUDs;
 
 	BulletinPane() {
 		// TODO replace with bullitenBoard stuff
-		posts = new ArrayList<>();
+		postHUDs = new ArrayList<>();
 		postPane = new GridPane();
 
 		updateScene(new Post(0, "abc", "afdfsfds", LocalDateTime.now()));
@@ -33,7 +34,7 @@ public class BulletinPane extends BorderPane {
 		textAddField.setOnKeyPressed(e -> {
 			if (e.getCode() == KeyCode.ENTER) {
 				// TODO replace values with username/message
-				updateScene(new Post(posts.size(), "a", textAddField.getText(), LocalDateTime.now()));
+				updateScene(new Post(postHUDs.size(), "a", textAddField.getText(), LocalDateTime.now()));
 				textAddField.clear();
 			}
 		});
@@ -43,7 +44,37 @@ public class BulletinPane extends BorderPane {
 	}
 
 	void updateScene(Post input) {
-		posts.add(input);
-		postPane.add(new PostHUD(input, input.getId(), postPane), 0, posts.size());
+		// posts.add(input);
+		// creates new postHUD with displayIndex of the last postHUD
+		// TODO set the displayIndex to the index of the last VISIBLE postHUD
+		PostHUD postHUD1 = null;
+//		try {
+//			postHUD = new PostHUD(input, postHUDs.get(postHUDs.size() - 1).getDisplayIndex() + 1);
+//		} catch (Exception e) {
+//			postHUD = new PostHUD(input, 0);
+//		}
+		if (postHUDs.size() == 0)
+			postHUD1 = new PostHUD(input, 0);
+		else
+			for (int i = postHUDs.size() - 1; i >= 0; i--)
+				if (!postHUDs.get(i).post.getDeleteFlag()) {
+					postHUD1 = new PostHUD(input, postHUDs.get(i).getDisplayIndex() + 1);
+					break;
+				} else if (i == 0)
+					postHUD1 = new PostHUD(input, 0);
+		PostHUD postHUD = postHUD1;
+
+		postHUD.deleteButton.setOnAction(e -> {
+			// deletes postHUD
+			// TODO
+			postHUDs.get(postHUDs.indexOf(postHUD)).post.setDeleteFlag(true);
+			postPane.getChildren().remove(postHUD.getDisplayIndex());
+			for (int i = postHUDs.indexOf(postHUD) + 1; i < postHUDs.size(); i++)
+				postHUDs.get(i).displayIndexMinus1();
+			System.out.print("deleted " + postHUD.getDisplayIndex());
+		});
+		postHUDs.add(postHUD);
+		postPane.add(postHUD, 0, postHUD.getDisplayIndex());
+
 	}
 }

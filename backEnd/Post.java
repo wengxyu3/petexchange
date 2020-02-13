@@ -41,7 +41,7 @@ public class Post {
 		// TODO
 	}
 
-	protected void setDeleteFlag(boolean toSet) {
+	public void setDeleteFlag(boolean toSet) {
 		deleteFlag = toSet;
 	}
 }

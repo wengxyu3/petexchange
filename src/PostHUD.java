@@ -6,18 +6,17 @@ import backEnd.Post;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 
 public class PostHUD extends BorderPane {
 	Post post;
-	int displayIndex;
-	Pane parentPane;
+	private int displayIndex;
+	// Pane parentPane;
+	Button deleteButton;
 
-	PostHUD(Post inputPost, int indexInput, GridPane parentInput) {
+	PostHUD(Post inputPost, int indexInput) {
 		super();
 		post = inputPost;
-		parentPane = parentInput;
+		// parentPane = parentInput;
 		displayIndex = indexInput;
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm");
 		/*
@@ -34,7 +33,8 @@ public class PostHUD extends BorderPane {
 		 *
 		 * this.add(firstRowPane, 0, 0); this.add(secondRowPane, 0, 1);
 		 */
-		String toPost = post.getUsername() + "    " + post.getDateTime().format(formatter) + "\n" + post.getMessage();
+		String toPost = post.getUsername() + "    " + post.getDateTime().format(formatter) + "\n" + post.getMessage()
+				+ displayIndex;
 
 		TextArea postText = new TextArea();
 
@@ -44,13 +44,25 @@ public class PostHUD extends BorderPane {
 
 		this.setCenter(postText);
 
-		Button deleteButton = new Button("Delete");
-		deleteButton.setOnAction(e -> {
-			// TODO fix this
-			parentPane.getChildren().remove(displayIndex);
-			System.out.print("deleted " + displayIndex);
-		});
+		deleteButton = new Button("Delete");
+//		deleteButton.setOnAction(e -> {
+//			// TODO fix this
+//			parentPane.getChildren().remove(displayIndex);
+//			System.out.print("deleted " + displayIndex);
+//		});
 		this.setRight(deleteButton);
 
+	}
+
+	void displayIndexMinus1() {
+		displayIndex--;
+	}
+
+	int getDisplayIndex() {
+		return displayIndex;
+	}
+
+	void setDisplayIndex(int input) {
+		displayIndex = input;
 	}
 }

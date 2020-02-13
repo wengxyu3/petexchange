@@ -27,4 +27,5 @@ public class PostTest extends Application {
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
+
 }
