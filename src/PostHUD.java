@@ -19,22 +19,8 @@ public class PostHUD extends BorderPane {
 		// parentPane = parentInput;
 		displayIndex = indexInput;
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm");
-		/*
-		 * TextField dateTimeField = new
-		 * TextField(post.getDateTime().format(formatter)); TextField senderField = new
-		 * TextField(post.getUsername()); TextField messageField = new
-		 * TextField(post.getMessage());
-		 *
-		 * // TODO add first row HBox firstRowPane = new HBox();
-		 * firstRowPane.getChildren().addAll(senderField, dateTimeField);
-		 *
-		 * HBox secondRowPane = new HBox();
-		 * secondRowPane.getChildren().add(messageField);
-		 *
-		 * this.add(firstRowPane, 0, 0); this.add(secondRowPane, 0, 1);
-		 */
-		String toPost = post.getUsername() + "    " + post.getDateTime().format(formatter) + "\n" + post.getMessage()
-				+ displayIndex;
+
+		String toPost = post.getUsername() + "    " + post.getDateTime().format(formatter) + "\n" + post.getMessage();
 
 		TextArea postText = new TextArea();
 
@@ -45,11 +31,6 @@ public class PostHUD extends BorderPane {
 		this.setCenter(postText);
 
 		deleteButton = new Button("Delete");
-//		deleteButton.setOnAction(e -> {
-//			// TODO fix this
-//			parentPane.getChildren().remove(displayIndex);
-//			System.out.print("deleted " + displayIndex);
-//		});
 		this.setRight(deleteButton);
 
 	}
