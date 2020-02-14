@@ -103,7 +103,13 @@ public class bulletinboard{
 		}
 	}
 	public ArrayList<Post> listPosts(){
-		return this.postcontents;
+		ArrayList<Post> e = new ArrayList<Post>();
+		for(int i=0; i<postcontents.size(); i++) {
+			if(postcontents.get(i).getDeleteFlag() == false) {
+				e.add(postcontents.get(i));
+			}
+		}
+		return e;
 	}
 	public void displayPosts(){
 		for(int i=0; i<postcontents.size(); i++) {

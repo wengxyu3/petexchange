@@ -45,7 +45,7 @@ public class Account {
 			break;
 		case MAC: // TODO see what happens with MacOS file stuff
 			String home1 = System.getProperty("user.home");
-			file = home1 + "\\" + username1;
+			file = home1 + "/Documents/Java" + username1;
 			break;
 		default:
 			// TODO add default handler

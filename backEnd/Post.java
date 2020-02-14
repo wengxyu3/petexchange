@@ -19,23 +19,23 @@ public class Post {
 		postDeleted = false;
 	}
 
-	protected LocalDateTime getDateTime() {
+	public LocalDateTime getDateTime() {
 		return postDate;
 	}
 
-	protected boolean getDeleteFlag() {
+	public boolean getDeleteFlag() {
 		return postDeleted;
 	}
 
-	protected long getId() {
+	public long getId() {
 		return postId;
 	}
 
-	protected String getMessage() {
+	public String getMessage() {
 		return postContent;
 	}
 
-	protected String getUsername() {
+	public String getUsername() {
 		return postUsername;
 	}
 
@@ -45,6 +45,10 @@ public class Post {
 	protected void setDeleteFlag(boolean toSet) {
 		postDeleted = toSet;
 	}
-	
+	public void delete(boolean toSet, String username) {
+		if(username.equals(postUsername)){
+			postDeleted = toSet;
+		}
+	}
 	
 }

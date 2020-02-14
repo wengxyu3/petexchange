@@ -4,64 +4,64 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import backEnd.Post;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import backEnd.bulletinboard;
 
 public class BulletinPane extends BorderPane {
 	// TODO replace this with BulletinBoard
 	// ArrayList<Post> posts;
+	ArrayList<Post> posts = new ArrayList<Post>();
 	GridPane postPane;
-	ArrayList<PostHUD> postHUDs;
-
-	BulletinPane(String username) {
+	ArrayList<PostHUD> postHUDs = new ArrayList<PostHUD>();
+	String username;
+	Label userlabel;
+	BulletinPane(String user, String file) {
+		username = user;
+		userlabel = new Label("Logged in as: "+username);
+		bulletinboard bb = new bulletinboard(file);
 		// TODO replace with bullitenBoard stuff
-		postHUDs = new ArrayList<>();
 		postPane = new GridPane();
-
+		
 		ScrollPane postScrollPane = new ScrollPane();
 		postScrollPane.setContent(postPane);
-
+		
 		TextField textAddField = new TextField();
 		textAddField.setOnKeyPressed(e -> {
-			if (e.getCode() == KeyCode.ENTER) {
+			if (e.getCode() == KeyCode.ENTER && !textAddField.getText().equals("")) {
 				// TODO replace values with username/message
-				updateScene(new Post(postHUDs.size(), username, textAddField.getText(), LocalDateTime.now()));
+				createPost(new Post(bb.returnID(), username, textAddField.getText(), LocalDateTime.now()), bb);
 				textAddField.clear();
 			}
 		});
-
+		this.setTop(userlabel);
 		this.setCenter(postScrollPane);
 		this.setBottom(textAddField);
+		refreshScene(bb);
 	}
-
-	void updateScene(Post input) {
+	void createPost(Post input, bulletinboard bb) {
 		// creates new postHUD with displayIndex of the last postHUD
-		PostHUD postHUD1 = null;
-		if (postHUDs.size() == 0)
-			postHUD1 = new PostHUD(input, 0);
-		else
-			for (int i = postHUDs.size() - 1; i >= 0; i--)
-				if (!postHUDs.get(i).post.getDeleteFlag()) {
-					postHUD1 = new PostHUD(input, postHUDs.get(i).getDisplayIndex() + 1);
-					break;
-				} else if (i == 0)
-					postHUD1 = new PostHUD(input, 0);
-		PostHUD postHUD = postHUD1;
-
-		postHUD.deleteButton.setOnAction(e -> {
-			// deletes postHUD
-			// TODO
-			postHUDs.get(postHUDs.indexOf(postHUD)).post.setDeleteFlag(true);
-			postPane.getChildren().remove(postHUD.getDisplayIndex());
-			for (int i = postHUDs.indexOf(postHUD) + 1; i < postHUDs.size(); i++)
-				postHUDs.get(i).displayIndexMinus1();
-			System.out.print("deleted " + postHUD.getDisplayIndex());
-		});
-		postHUDs.add(postHUD);
-		postPane.add(postHUD, 0, postHUD.getDisplayIndex());
-
+		bb.addPost(input);
+		refreshScene(bb);
+	}
+	void removePost(Post input, bulletinboard bb) {
+		bb.deletePost(input, username);
+		refreshScene(bb);
+	}
+	void refreshScene(bulletinboard bb) {
+		bb.saveBulletin();
+		postHUDs.clear();
+		postPane.getChildren().clear();
+		for(int i=0; i<bb.listPosts().size(); i++) {
+			postHUDs.add(new PostHUD(bb.listPosts().get(i), username));
+		}
+		for(int i=0; i<postHUDs.size(); i++) {
+			postPane.add(postHUDs.get(i), 0, i);
+		}
+		
 	}
 }
