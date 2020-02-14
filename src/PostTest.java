@@ -1,5 +1,6 @@
 package src;
 
+import backEnd.Account;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -12,7 +13,7 @@ public class PostTest extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		// TODO replace this with BulletinBoard
-		Scene scene = new Scene(new BulletinPane(""));
+		Scene scene = new Scene(new UserDisplay(new Account()));
 
 		primaryStage.setScene(scene);
 		primaryStage.show();

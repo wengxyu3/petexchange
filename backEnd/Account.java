@@ -33,6 +33,10 @@ public class Account {
 	private ArrayList<Request> requests = new ArrayList<>();
 	private ArrayList<Review> ratings = new ArrayList<>();
 
+	public Account() {
+		// TODO Auto-generated constructor stub
+	}
+
 	Account(String password1, File file1) throws PasswordMismatchException {
 		file = file1.getPath();
 		loginHandler(password1);
@@ -116,6 +120,53 @@ public class Account {
 	void editEmail(String text) {
 		email = text;
 		save();
+	}
+
+	public void editHandler(String inputString, DisplayType displayType) {
+
+		switch (displayType) {
+		case USERNAME:
+			editUsername(inputString);
+			break;
+
+		case PASSWORD:
+			editPassword(inputString);
+			break;
+
+		case DESCRIPTION:
+			editDescription(inputString);
+			break;
+
+		case EMAIL:
+			editEmail(inputString);
+			break;
+
+		case ADRESS:
+			editAdress(inputString);
+			break;
+
+		case STATE:
+			editState(inputString);
+			break;
+
+		case ZIPCODE:
+			editZipCode(Integer.valueOf(inputString));
+			break;
+
+		case PHONENUMBER:
+			editPhoneNumber(Long.valueOf(inputString));
+			break;
+
+		case CREDITNUMBER:
+			editCreditNumber(Long.valueOf(inputString));
+			break;
+
+		default:
+			// TODO throw an error message
+			System.out.print("Invalid Input");
+			break;
+		}
+
 	}
 
 	void editPassword(String text) {
