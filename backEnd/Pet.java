@@ -22,6 +22,10 @@ public class Pet {
 		description = (String) input.get("description");
 	}
 
+	public Pet(String inputName) {
+		name = inputName;
+	}
+
 	private void editDescription(String text) {
 		description = text;
 	}

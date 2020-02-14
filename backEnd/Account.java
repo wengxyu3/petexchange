@@ -97,32 +97,7 @@ public class Account {
 		save();
 	}
 
-	void editAdress(String text) {
-		adress = text;
-		save();
-	}
-
-	void editCity(String text) {
-		city = text;
-		save();
-	}
-
-	void editCreditNumber(Long input) {
-		creditNumber = input;
-		save();
-	}
-
-	void editDescription(String text) {
-		description = text;
-		save();
-	}
-
-	void editEmail(String text) {
-		email = text;
-		save();
-	}
-
-	public void editHandler(String inputString, DisplayType displayType) {
+	public void edit(String inputString, DisplayType displayType) {
 
 		switch (displayType) {
 		case USERNAME:
@@ -143,6 +118,10 @@ public class Account {
 
 		case ADRESS:
 			editAdress(inputString);
+			break;
+
+		case CITY:
+			editCity(inputString);
 			break;
 
 		case STATE:
@@ -167,6 +146,31 @@ public class Account {
 			break;
 		}
 
+	}
+
+	void editAdress(String text) {
+		adress = text;
+		save();
+	}
+
+	void editCity(String text) {
+		city = text;
+		save();
+	}
+
+	void editCreditNumber(Long input) {
+		creditNumber = input;
+		save();
+	}
+
+	void editDescription(String text) {
+		description = text;
+		save();
+	}
+
+	void editEmail(String text) {
+		email = text;
+		save();
 	}
 
 	void editPassword(String text) {
@@ -210,6 +214,47 @@ public class Account {
 		save();
 	}
 
+	public String get(DisplayType displayType) {
+
+		switch (displayType) {
+		case USERNAME:
+			return username;
+
+		case PASSWORD:
+			return password;
+
+		case DESCRIPTION:
+			return description;
+
+		case EMAIL:
+			return email;
+
+		case ADRESS:
+			return adress;
+
+		case CITY:
+			return city;
+
+		case STATE:
+			return state;
+
+		case ZIPCODE:
+			return String.valueOf(zipCode);
+
+		case PHONENUMBER:
+			return String.valueOf(phoneNumber);
+
+		case CREDITNUMBER:
+			return String.valueOf(creditNumber);
+
+		default:
+			// TODO throw an error message
+			System.out.print("Invalid Input");
+			return null;
+		}
+
+	}
+
 	public String getAdress() {
 		return adress;
 	}
@@ -239,6 +284,10 @@ public class Account {
 
 	public String getPassword() {
 		return password;
+	}
+
+	public ArrayList<Pet> getPets() {
+		return pets;
 	}
 
 	public long getPhoneNumber() {
