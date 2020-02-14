@@ -33,6 +33,10 @@ public class Account {
 	private ArrayList<Request> requests = new ArrayList<>();
 	private ArrayList<Review> ratings = new ArrayList<>();
 
+	public Account() {
+		// TODO Auto-generated constructor stub
+	}
+
 	Account(String password1, File file1) throws PasswordMismatchException {
 		file = file1.getPath();
 		loginHandler(password1);
@@ -91,6 +95,57 @@ public class Account {
 	public void deletePet(Pet pet1) {
 		pets.remove(pet1);
 		save();
+	}
+
+	public void edit(String inputString, DisplayType displayType) {
+
+		switch (displayType) {
+		case USERNAME:
+			editUsername(inputString);
+			break;
+
+		case PASSWORD:
+			editPassword(inputString);
+			break;
+
+		case DESCRIPTION:
+			editDescription(inputString);
+			break;
+
+		case EMAIL:
+			editEmail(inputString);
+			break;
+
+		case ADRESS:
+			editAdress(inputString);
+			break;
+
+		case CITY:
+			editCity(inputString);
+			break;
+
+		case STATE:
+			editState(inputString);
+			break;
+
+		case ZIPCODE:
+			editZipCode(Integer.valueOf(inputString));
+			break;
+
+		case PHONENUMBER:
+			editPhoneNumber(Long.valueOf(inputString));
+			break;
+
+		case CREDITNUMBER:
+			editCreditNumber(Long.valueOf(inputString));
+			break;
+
+		default:
+			// TODO throw an error message
+			System.out.print("Invalid Input");
+			break;
+		}
+
 	}
 
 	void editAdress(String text) {
@@ -159,6 +214,47 @@ public class Account {
 		save();
 	}
 
+	public String get(DisplayType displayType) {
+
+		switch (displayType) {
+		case USERNAME:
+			return username;
+
+		case PASSWORD:
+			return password;
+
+		case DESCRIPTION:
+			return description;
+
+		case EMAIL:
+			return email;
+
+		case ADRESS:
+			return adress;
+
+		case CITY:
+			return city;
+
+		case STATE:
+			return state;
+
+		case ZIPCODE:
+			return String.valueOf(zipCode);
+
+		case PHONENUMBER:
+			return String.valueOf(phoneNumber);
+
+		case CREDITNUMBER:
+			return String.valueOf(creditNumber);
+
+		default:
+			// TODO throw an error message
+			System.out.print("Invalid Input");
+			return null;
+		}
+
+	}
+
 	public String getAdress() {
 		return adress;
 	}
@@ -188,6 +284,10 @@ public class Account {
 
 	public String getPassword() {
 		return password;
+	}
+
+	public ArrayList<Pet> getPets() {
+		return pets;
 	}
 
 	public long getPhoneNumber() {

@@ -3,6 +3,7 @@ package src;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+import backEnd.Account;
 import backEnd.Post;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
