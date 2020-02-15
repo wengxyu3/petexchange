@@ -7,6 +7,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 
 public class PostHUD extends GridPane {
 	Post post;
@@ -18,25 +20,29 @@ public class PostHUD extends GridPane {
 		super();
 		post = inputPost;
 		// parentPane = parentInput;
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd HH:mm");
 
 		String toPost = post.getMessage();
 
-		TextArea postText = new TextArea();
-		Label usernameDisplay = new Label(post.getUsername());
-		Label dateDisplay = new Label(post.getDateTime().format(formatter));
-		Label idDisplay = new Label("#"+ Long.toString(post.getId()));
-		postText.setText(toPost);
+		TextArea postText = new TextArea(toPost);
+		Label display = new Label(post.getUsername() + "  " + post.getDateTime().format(formatter) + "   #" +Long.toString(post.getId()) );
+		display.setFont(Font.font("calibri", 16));
+//		Label dateDisplay = new Label(post.getDateTime().format(formatter));
+//		dateDisplay.setFont(Font.font("calibri", 24));
+//		Label idDisplay = new Label("#"+ Long.toString(post.getId()));
+//		idDisplay.setFont(Font.font("calibri", 24));
+//		Text t = new Text(toPost);
 		postText.setEditable(false);
 		postText.setWrapText(true);
-		
+		postText.setPrefHeight(50);
+//		t.setWrappingWidth(500);
 		deleteButton = new Button("Delete");
-		this.add(usernameDisplay, 0, 0);
-		this.add(dateDisplay, 1, 0);
+		this.add(display, 0, 0);
+//		this.add(dateDisplay, 1, 0);
 		this.add(postText, 0, 1);
-		this.add(idDisplay, 2, 0);
+//		this.add(idDisplay, 2, 0);
 		if(username.equals(post.getUsername())){
-			this.add(deleteButton,2,1);
+			this.add(deleteButton,1,0);
 		}
 		deleteButton.setOnAction(e -> {
 			inputPost.delete(true, username);
