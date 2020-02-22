@@ -24,7 +24,7 @@ public class PostHUD extends GridPane {
 
 		String toPost = post.getMessage();
 
-		TextArea postText = new TextArea(toPost);
+		Label postText = new Label(toPost);
 		Label display = new Label(post.getUsername() + "  " + post.getDateTime().format(formatter) + "   #" +Long.toString(post.getId()) );
 		display.setFont(Font.font("calibri", 16));
 //		Label dateDisplay = new Label(post.getDateTime().format(formatter));
@@ -32,10 +32,12 @@ public class PostHUD extends GridPane {
 //		Label idDisplay = new Label("#"+ Long.toString(post.getId()));
 //		idDisplay.setFont(Font.font("calibri", 24));
 //		Text t = new Text(toPost);
-		postText.setEditable(false);
-		postText.setWrapText(true);
-		postText.setPrefHeight(50);
+//		postText.setEditable(false);
+//		postText.setWrapText(true);
+//		postText.setPrefHeight(50);
 //		t.setWrappingWidth(500);
+		postText.setPrefWidth(250);
+		postText.setWrapText(true);
 		deleteButton = new Button("Delete");
 		this.add(display, 0, 0);
 //		this.add(dateDisplay, 1, 0);
