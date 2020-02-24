@@ -97,7 +97,7 @@ public class Account {
 		save();
 	}
 
-	public void edit(String inputString, DisplayType displayType) {
+	public void edit(String inputString, UserDisplayType displayType) {
 
 		switch (displayType) {
 		case USERNAME:
@@ -214,7 +214,7 @@ public class Account {
 		save();
 	}
 
-	public String get(DisplayType displayType) {
+	public String get(UserDisplayType displayType) {
 
 		switch (displayType) {
 		case USERNAME:
@@ -358,6 +358,7 @@ public class Account {
 				pets.remove(i);
 	}
 
+	@SuppressWarnings("unchecked")
 	void save() {
 		jsonObj.put("username", username);
 		jsonObj.put("password", password);

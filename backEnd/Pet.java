@@ -26,6 +26,27 @@ public class Pet {
 		name = inputName;
 	}
 
+	public void edit(String stringInput, PetDisplayType displayType) {
+		switch (displayType) {
+		case NAME:
+			editName(stringInput);
+			break;
+
+		case SPECIES:
+			editSpecies(stringInput);
+			break;
+
+		case DESCRIPTION:
+			editDescription(stringInput);
+			break;
+
+		default:
+			// TODO throw an error message
+			System.out.print("Invalid Input");
+			break;
+		}
+	}
+
 	private void editDescription(String text) {
 		description = text;
 	}
@@ -58,6 +79,25 @@ public class Pet {
 		species = text;
 	}
 
+	public String get(PetDisplayType displayType) {
+		switch (displayType) {
+		case NAME:
+			return name;
+
+		case SPECIES:
+			return species;
+
+		case DESCRIPTION:
+			return description;
+
+		default:
+			// TODO throw an error message
+			System.out.print("Invalid Input");
+			return null;
+		}
+
+	}
+
 	public String getDescription() {
 		return description;
 	}
@@ -70,6 +110,7 @@ public class Pet {
 		return species;
 	}
 
+	@SuppressWarnings("unchecked")
 	JSONObject returnJsonObj() {
 		jsonObj.put("name", name);
 		jsonObj.put("description", description);

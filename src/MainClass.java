@@ -64,6 +64,11 @@ public class MainClass extends Application {
 		try {
 			Account loginAccount = new Account(username, password, false);
 			// TODO progress to next scene
+			BulletinPane chatRoom = new BulletinPane(loginAccount);
+			Scene chatRoomScene = new Scene(chatRoom);
+			Stage chatRoomStage = new Stage();
+			chatRoomStage.setScene(chatRoomScene);
+			chatRoomStage.show();
 		} catch (PasswordMismatchException e1) {
 			BorderPane errorPane = new BorderPane();
 			Scene errorScene = new Scene(errorPane);

@@ -5,12 +5,13 @@ import java.util.ArrayList;
 import backEnd.Account;
 import backEnd.Pet;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 
-public class InfoBar extends BorderPane {
+public class InfoBar extends ScrollPane {
 	GridPane petPane;
 	Account account;
 	ArrayList<PetBar> petBars = new ArrayList<>();
@@ -18,16 +19,18 @@ public class InfoBar extends BorderPane {
 	InfoBar(Account inputAccount) {
 		account = inputAccount;
 
+		BorderPane pane = new BorderPane();
+
 		TextField usernameField = new TextField();
 		usernameField.setText(account.getUsername());
 		usernameField.setEditable(false);
 
-		this.setTop(usernameField);
+		pane.setTop(usernameField);
 
 		petPane = new GridPane();
 		petSetup();
 
-		this.setCenter(petPane);
+		pane.setCenter(petPane);
 
 		Button addPetButton = new Button("Add Pet");
 		TextField inputPetNameField = new TextField();
@@ -47,12 +50,14 @@ public class InfoBar extends BorderPane {
 
 		});
 
-		this.setBottom(addPetButton);
+		pane.setBottom(addPetButton);
 
+		this.setContent(pane);
 	}
 
 	void addPetBar(Pet inputPet) {
 		PetBar petBar = new PetBar(inputPet);
+
 		petBars.add(petBar);
 		petPane.add(petBar, 0, petBars.indexOf(petBar));
 	}
@@ -60,5 +65,11 @@ public class InfoBar extends BorderPane {
 	void petSetup() {
 		for (int i = 0; i < account.getPets().size(); i++)
 			addPetBar(account.getPets().get(i));
+	}
+
+	void petUpdate() {
+		petBars.clear();
+		petPane.getChildren().clear();
+		petSetup();
 	}
 }
