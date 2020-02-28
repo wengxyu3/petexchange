@@ -1,17 +1,36 @@
 package src;
 
 import backEnd.Pet;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class PetBar extends Pane {
-	Pet pet;
+	private Pet pet;
+	protected Button petButton;
+	protected PetPane petPane;
+	protected Stage petStage;
 
-	PetBar(Pet inputPet) {
+	PetBar(/* Account inputAccount, */ Pet inputPet) {
 		pet = inputPet;
 
-		Text petName = new Text(pet.getName());
+		petPane = new PetPane(pet);
 
-		this.getChildren().add(petName);
+		// Text petName = new Text(pet.getName());
+
+		petButton = new Button(pet.getName());
+		petButton.setOnAction(e -> {
+			Scene scene = new Scene(petPane);
+			petStage = new Stage();
+			petStage.setScene(scene);
+			petStage.show();
+		});
+
+		this.getChildren().add(petButton);
+	}
+
+	Pet returnPet() {
+		return pet;
 	}
 }

@@ -12,9 +12,9 @@ public class Pet {
 	String description;
 	JSONObject jsonObj = new JSONObject();
 
-	public Pet() {
-
-	}
+//	public Pet() {
+//
+//	}
 
 	Pet(JSONObject input) {
 		name = (String) input.get("name");
@@ -22,8 +22,38 @@ public class Pet {
 		description = (String) input.get("description");
 	}
 
-	public Pet(String inputName) {
-		name = inputName;
+	public Pet(String inputName) throws NullPetNameException {
+		if (inputName.trim().isEmpty())
+			throw new NullPetNameException();
+		name = inputName.trim();
+	}
+
+	public void edit(String stringInput, PetDisplayType displayType) throws NullPetNameException {
+		String string;
+		try {
+			string = stringInput.trim();
+		} catch (NullPointerException e) {
+			string = "";
+		}
+		switch (displayType) {
+		case NAME:
+			editName(string);
+			break;
+
+		case SPECIES:
+			editSpecies(string);
+			break;
+
+		case DESCRIPTION:
+			editDescription(string);
+			break;
+
+		default:
+			// TODO throw an error message
+			System.out.print("Invalid Input");
+			break;
+		}
+
 	}
 
 	private void editDescription(String text) {
@@ -45,17 +75,42 @@ public class Pet {
 //		}
 //	}
 	protected void editHandler(String text1, String text2, String text3) {
-		editName(text1);
+		try {
+			editName(text1);
+		} catch (NullPetNameException e) {
+
+		}
 		editSpecies(text2);
 		editDescription(text3);
 	}
 
-	private void editName(String text) {
+	private void editName(String text) throws NullPetNameException {
+		if (text.trim().isEmpty())
+			throw new NullPetNameException();
 		name = text;
 	}
 
 	private void editSpecies(String text) {
 		species = text;
+	}
+
+	public String get(PetDisplayType displayType) {
+		switch (displayType) {
+		case NAME:
+			return name;
+
+		case SPECIES:
+			return species;
+
+		case DESCRIPTION:
+			return description;
+
+		default:
+			// TODO throw an error message
+			System.out.print("Invalid Input");
+			return null;
+		}
+
 	}
 
 	public String getDescription() {
@@ -70,6 +125,7 @@ public class Pet {
 		return species;
 	}
 
+	@SuppressWarnings("unchecked")
 	JSONObject returnJsonObj() {
 		jsonObj.put("name", name);
 		jsonObj.put("description", description);

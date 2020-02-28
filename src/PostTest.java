@@ -13,7 +13,7 @@ public class PostTest extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		// TODO replace this with BulletinBoard
-		Scene scene = new Scene(new BulletinPane("testusername2", "testbulletinboard"));
+		Scene scene = new Scene(new UserPane(new Account()));
 
 		primaryStage.setScene(scene);
 		primaryStage.show();

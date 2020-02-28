@@ -1,6 +1,6 @@
 package backEnd;
 
-public enum DisplayType {
+public enum UserDisplayType {
 
 	USERNAME(0, "Username"), PASSWORD(1, "Password"), DESCRIPTION(2, "Description"), EMAIL(3, "Email"),
 	ADRESS(4, "Adress"), CITY(5, "City"), STATE(6, "State"), ZIPCODE(7, "Zip Code"), PHONENUMBER(8, "Phone Number"),
@@ -10,7 +10,7 @@ public enum DisplayType {
 	private int numberValue;
 	private String stringValue;
 
-	DisplayType(int input, String stringInput) {
+	UserDisplayType(int input, String stringInput) {
 		numberValue = input;
 		stringValue = stringInput;
 	}

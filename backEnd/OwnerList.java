@@ -50,6 +50,7 @@ public class OwnerList {
 		return owners.toArray();
 	}
 
+	@SuppressWarnings("unused")
 	public void Register(String name, String password) throws FileExistsException {
 		if (CheckSafe(name)) {
 			try {

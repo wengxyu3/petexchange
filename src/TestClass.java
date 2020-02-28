@@ -2,7 +2,6 @@ package src;
 
 import backEnd.Account;
 import backEnd.PasswordMismatchException;
-import backEnd.Pet;
 
 public class TestClass {
 
@@ -18,11 +17,11 @@ public class TestClass {
 		} catch (PasswordMismatchException e) {
 			System.out.print("password does not match");
 		}
-		Pet testPet = new Pet();
-		Pet deletePet = new Pet();
-		testAccount.addPet(testPet);
-		testAccount.addPet(deletePet);
-		testAccount.deletePet(deletePet);
+//		Pet testPet = new Pet();
+//		Pet deletePet = new Pet();
+//		testAccount.addPet(testPet);
+//		testAccount.addPet(deletePet);
+//		testAccount.deletePet(deletePet);
 
 	}
 }
