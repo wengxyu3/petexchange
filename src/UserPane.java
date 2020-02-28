@@ -49,7 +49,7 @@ public class UserPane extends BorderPane {
 
 	void save() {
 		for (UserDisplayType i : UserDisplayType.values())
-			account.edit(textFieldArray[i.returnIntValue()].getText(), i);
+			account.edit(textFieldArray[i.returnIntValue()].getText().trim(), i);
 	}
 
 }
