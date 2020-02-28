@@ -178,6 +178,13 @@ public class Account {
 		save();
 	}
 
+	public void editPet(Pet inputPet, String inputString, PetDisplayType displayType) {
+		if (pets.indexOf(inputPet) != -1) {
+			pets.get(pets.indexOf(inputPet)).edit(inputString, displayType);
+			save();
+		}
+	}
+
 	// void editPet(int index, PetString pString, String text) {
 //
 //	}

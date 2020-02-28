@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import backEnd.Account;
 import backEnd.Pet;
+import backEnd.PetDisplayType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -28,7 +29,7 @@ public class InfoBar extends ScrollPane {
 		pane.setTop(usernameField);
 
 		petPane = new GridPane();
-		petSetup();
+		petUpdate();
 
 		pane.setCenter(petPane);
 
@@ -57,14 +58,28 @@ public class InfoBar extends ScrollPane {
 
 	void addPetBar(Pet inputPet) {
 		PetBar petBar = new PetBar(inputPet);
+		petBar.petPane.deleteButton.setOnAction(e -> {
+			account.deletePet(petBar.returnPet());
+			petBar.petStage.close();
+			petUpdate();
+		});
+		petBar.petPane.saveButton.setOnAction(e -> {
+			for (PetDisplayType i : PetDisplayType.values())
+				account.editPet(petBar.returnPet(), petBar.petPane.textFieldArray[i.returnIntValue()].getText(), i);
+			petBar.petStage.close();
+			petBar.petButton.setText(petBar.returnPet().getName());
+			petUpdate();
+		});
 
 		petBars.add(petBar);
 		petPane.add(petBar, 0, petBars.indexOf(petBar));
+
 	}
 
 	void petSetup() {
 		for (int i = 0; i < account.getPets().size(); i++)
 			addPetBar(account.getPets().get(i));
+
 	}
 
 	void petUpdate() {

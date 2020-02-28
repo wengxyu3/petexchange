@@ -52,9 +52,9 @@ public class PetPane extends BorderPane {
 			textFieldArray[i.returnIntValue()].setText(pet.get(i));
 	}
 
-	void save() {
-		for (PetDisplayType i : PetDisplayType.values())
-			pet.edit(textFieldArray[i.returnIntValue()].getText(), i);
-
-	}
+//	void save() {
+//		for (PetDisplayType i : PetDisplayType.values())
+//			pet.edit(textFieldArray[i.returnIntValue()].getText(), i);
+//
+//	}
 }
