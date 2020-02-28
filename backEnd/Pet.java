@@ -23,12 +23,12 @@ public class Pet {
 	}
 
 	public Pet(String inputName) throws NullPetNameException {
-		name = inputName.trim();
-		if (name.isEmpty())
+		if (inputName.trim().isEmpty())
 			throw new NullPetNameException();
+		name = inputName.trim();
 	}
 
-	public void edit(String stringInput, PetDisplayType displayType) {
+	public void edit(String stringInput, PetDisplayType displayType) throws NullPetNameException {
 		String string = stringInput.trim();
 		switch (displayType) {
 		case NAME:
@@ -69,12 +69,18 @@ public class Pet {
 //		}
 //	}
 	protected void editHandler(String text1, String text2, String text3) {
-		editName(text1);
+		try {
+			editName(text1);
+		} catch (NullPetNameException e) {
+
+		}
 		editSpecies(text2);
 		editDescription(text3);
 	}
 
-	private void editName(String text) {
+	private void editName(String text) throws NullPetNameException {
+		if (text.trim().isEmpty())
+			throw new NullPetNameException();
 		name = text;
 	}
 

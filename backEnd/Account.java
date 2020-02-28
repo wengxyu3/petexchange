@@ -173,7 +173,7 @@ public class Account {
 		save();
 	}
 
-	public void editPet(Pet inputPet, String inputString, PetDisplayType displayType) {
+	public void editPet(Pet inputPet, String inputString, PetDisplayType displayType) throws NullPetNameException {
 		if (pets.indexOf(inputPet) != -1) {
 			pets.get(pets.indexOf(inputPet)).edit(inputString, displayType);
 			save();

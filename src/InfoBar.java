@@ -3,6 +3,7 @@ package src;
 import java.util.ArrayList;
 
 import backEnd.Account;
+import backEnd.NullPetNameException;
 import backEnd.Pet;
 import backEnd.PetDisplayType;
 import javafx.scene.control.Button;
@@ -44,7 +45,7 @@ public class InfoBar extends ScrollPane {
 							account.addPet(new Pet(inputPetNameField.getText()));
 							addPetBar(account.getPets().get(account.getPets().size() - 1));
 							petPane.getChildren().remove(inputPetNameField);
-						} catch (Exception e2) {
+						} catch (NullPetNameException e2) {
 						}
 				});
 				petPane.add(inputPetNameField, 0, petBars.size());
@@ -67,10 +68,16 @@ public class InfoBar extends ScrollPane {
 		});
 		petBar.petPane.saveButton.setOnAction(e -> {
 			for (PetDisplayType i : PetDisplayType.values())
-				account.editPet(petBar.returnPet(), petBar.petPane.textFieldArray[i.returnIntValue()].getText(), i);
-			petBar.petStage.close();
-			petBar.petButton.setText(petBar.returnPet().getName());
-			petUpdate();
+				try {
+					account.editPet(petBar.returnPet(), petBar.petPane.textFieldArray[i.returnIntValue()].getText(), i);
+					petBar.petStage.close();
+					petBar.petButton.setText(petBar.returnPet().getName());
+					petUpdate();
+				} catch (NullPetNameException e1) {
+					ErrorStage errorStage = new ErrorStage("This pet must have a name.");
+					errorStage.show();
+				}
+
 		});
 
 		petBars.add(petBar);
