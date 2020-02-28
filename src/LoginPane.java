@@ -76,30 +76,31 @@ public class LoginPane extends Pane {
 	}
 
 	private void createAccountHandle(Event e, String username, String password) {
-		BorderPane newAccountConfirmationPane = new BorderPane();
-		Scene newAccountConfirmationScene = new Scene(newAccountConfirmationPane);
-		Stage newAccountConfirmationStage = new Stage();
 
-		Pane isAccountCreatedPane = new Pane();
-		Text isAccountCreatedText = new Text(50, 50, "");
-		isAccountCreatedPane.getChildren().add(isAccountCreatedText);
-		Button newAccountConfirmationCloseButton = new Button("OK");
-		newAccountConfirmationPane.setTop(isAccountCreatedText);
-		newAccountConfirmationPane.setCenter(newAccountConfirmationCloseButton);
-		newAccountConfirmationStage.setScene(newAccountConfirmationScene);
-
-		isAccountCreatedText.setText("Account Created!");
 		try {
+			BorderPane newAccountConfirmationPane = new BorderPane();
+			Scene newAccountConfirmationScene = new Scene(newAccountConfirmationPane);
+			Stage newAccountConfirmationStage = new Stage();
+
+			Text accountCreatedText = new Text(50, 50, "Account Created!");
+			Button newAccountConfirmationCloseButton = new Button("OK");
+
+			newAccountConfirmationPane.setTop(accountCreatedText);
+			newAccountConfirmationPane.setCenter(newAccountConfirmationCloseButton);
+
+			newAccountConfirmationStage.setScene(newAccountConfirmationScene);
 			ownerList.Register(username, password);
+
+			newAccountConfirmationStage.show();
+			newAccountConfirmationCloseButton.setOnAction(e1 -> {
+
+				newAccountConfirmationStage.close();
+			});
 		} catch (FileExistsException e1) {
-			isAccountCreatedText.setText("This username is already taken.");
+			ErrorStage errorStage = new ErrorStage("This username is already taken.");
+			errorStage.show();
 		}
 
-		newAccountConfirmationStage.show();
-		newAccountConfirmationCloseButton.setOnAction(e1 -> {
-
-			newAccountConfirmationStage.close();
-		});
 	}
 
 	private void loginHandle(Event e, String username, String password) {
@@ -112,21 +113,7 @@ public class LoginPane extends Pane {
 			chatRoomStage.setScene(chatRoomScene);
 			chatRoomStage.show();
 		} catch (PasswordMismatchException e1) {
-			BorderPane errorPane = new BorderPane();
-			Scene errorScene = new Scene(errorPane);
-			Stage errorStage = new Stage();
-			Pane errorTextPane = new Pane();
-			Text errorText = new Text(50, 50, "Username/Password does not match.");
-			errorTextPane.getChildren().add(errorText);
-			Button errorCloseButton = new Button("OK");
-
-			errorPane.setTop(errorText);
-			errorPane.setCenter(errorCloseButton);
-			errorStage.setScene(errorScene);
-
-			errorCloseButton.setOnAction(e2 -> {
-				errorStage.close();
-			});
+			ErrorStage errorStage = new ErrorStage("Username/Password does not match.");
 
 			errorStage.show();
 		}
