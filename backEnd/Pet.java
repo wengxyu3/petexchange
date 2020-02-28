@@ -29,7 +29,12 @@ public class Pet {
 	}
 
 	public void edit(String stringInput, PetDisplayType displayType) throws NullPetNameException {
-		String string = stringInput.trim();
+		String string;
+		try {
+			string = stringInput.trim();
+		} catch (NullPointerException e) {
+			string = "";
+		}
 		switch (displayType) {
 		case NAME:
 			editName(string);
@@ -48,6 +53,7 @@ public class Pet {
 			System.out.print("Invalid Input");
 			break;
 		}
+
 	}
 
 	private void editDescription(String text) {
