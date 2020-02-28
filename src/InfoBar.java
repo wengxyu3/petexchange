@@ -39,11 +39,13 @@ public class InfoBar extends ScrollPane {
 		addPetButton.setOnAction(e -> {
 			if (!petPane.getChildren().contains(inputPetNameField)) {
 				inputPetNameField.setOnKeyPressed(e1 -> {
-					if (e1.getCode() == KeyCode.ENTER /* && !inputPetNameField.getText().trim().isEmpty() */) {
-						account.addPet(new Pet(inputPetNameField.getText().trim()));
-						addPetBar(account.getPets().get(account.getPets().size() - 1));
-						petPane.getChildren().remove(inputPetNameField);
-					}
+					if (e1.getCode() == KeyCode.ENTER /* && !inputPetNameField.getText().trim().isEmpty() */)
+						try {
+							account.addPet(new Pet(inputPetNameField.getText()));
+							addPetBar(account.getPets().get(account.getPets().size() - 1));
+							petPane.getChildren().remove(inputPetNameField);
+						} catch (Exception e2) {
+						}
 				});
 				petPane.add(inputPetNameField, 0, petBars.size());
 			}
@@ -65,8 +67,7 @@ public class InfoBar extends ScrollPane {
 		});
 		petBar.petPane.saveButton.setOnAction(e -> {
 			for (PetDisplayType i : PetDisplayType.values())
-				account.editPet(petBar.returnPet(), petBar.petPane.textFieldArray[i.returnIntValue()].getText().trim(),
-						i);
+				account.editPet(petBar.returnPet(), petBar.petPane.textFieldArray[i.returnIntValue()].getText(), i);
 			petBar.petStage.close();
 			petBar.petButton.setText(petBar.returnPet().getName());
 			petUpdate();

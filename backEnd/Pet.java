@@ -12,9 +12,9 @@ public class Pet {
 	String description;
 	JSONObject jsonObj = new JSONObject();
 
-	public Pet() {
-
-	}
+//	public Pet() {
+//
+//	}
 
 	Pet(JSONObject input) {
 		name = (String) input.get("name");
@@ -22,22 +22,25 @@ public class Pet {
 		description = (String) input.get("description");
 	}
 
-	public Pet(String inputName) {
-		name = inputName;
+	public Pet(String inputName) throws NullPetNameException {
+		name = inputName.trim();
+		if (name.isEmpty())
+			throw new NullPetNameException();
 	}
 
 	public void edit(String stringInput, PetDisplayType displayType) {
+		String string = stringInput.trim();
 		switch (displayType) {
 		case NAME:
-			editName(stringInput);
+			editName(string);
 			break;
 
 		case SPECIES:
-			editSpecies(stringInput);
+			editSpecies(string);
 			break;
 
 		case DESCRIPTION:
-			editDescription(stringInput);
+			editDescription(string);
 			break;
 
 		default:
