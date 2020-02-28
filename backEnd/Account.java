@@ -67,11 +67,6 @@ public class Account {
 
 	}
 
-	public void addPet() {
-		pets.add(new Pet());
-		save();
-	}
-
 	public void addPet(Pet pet1) {
 		pets.add(pet1);
 		save();
@@ -98,46 +93,46 @@ public class Account {
 	}
 
 	public void edit(String inputString, UserDisplayType displayType) {
-
+		String string = inputString.trim();
 		switch (displayType) {
 		case USERNAME:
-			editUsername(inputString);
+			editUsername(string);
 			break;
 
 		case PASSWORD:
-			editPassword(inputString);
+			editPassword(string);
 			break;
 
 		case DESCRIPTION:
-			editDescription(inputString);
+			editDescription(string);
 			break;
 
 		case EMAIL:
-			editEmail(inputString);
+			editEmail(string);
 			break;
 
 		case ADRESS:
-			editAdress(inputString);
+			editAdress(string);
 			break;
 
 		case CITY:
-			editCity(inputString);
+			editCity(string);
 			break;
 
 		case STATE:
-			editState(inputString);
+			editState(string);
 			break;
 
 		case ZIPCODE:
-			editZipCode(Integer.valueOf(inputString));
+			editZipCode(Integer.valueOf(string));
 			break;
 
 		case PHONENUMBER:
-			editPhoneNumber(Long.valueOf(inputString));
+			editPhoneNumber(Long.valueOf(string));
 			break;
 
 		case CREDITNUMBER:
-			editCreditNumber(Long.valueOf(inputString));
+			editCreditNumber(Long.valueOf(string));
 			break;
 
 		default:
@@ -313,6 +308,7 @@ public class Account {
 		return zipCode;
 	}
 
+	@SuppressWarnings("unchecked")
 	private void loginHandler() {
 		jsonParse = new JSONParser();
 		try (Reader reader = new FileReader(file)) {
