@@ -24,8 +24,8 @@ public class BulletinPane extends BorderPane {
 	String username;
 	Label userlabel;
 	ScrollPane postScrollPane = new ScrollPane();
-	BulletinPane(String user, String file) {
-		username = user;
+	BulletinPane(Account user, String file) {
+		username = user.getUsername();
 		userlabel = new Label("Logged in as: "+username);
 		bulletinboard bb = new bulletinboard(file);
 		// TODO replace with bullitenBoard stuff
