@@ -23,7 +23,6 @@ public class PostHUD extends GridPane {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd HH:mm");
 
 		String toPost = post.getMessage();
-
 		Label postText = new Label(toPost);
 		Label display = new Label(post.getUsername() + "  " + post.getDateTime().format(formatter) + "   #" +Long.toString(post.getId()) );
 		display.setFont(Font.font("calibri", 16));

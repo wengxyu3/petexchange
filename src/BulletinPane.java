@@ -3,6 +3,8 @@ package src;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+import javax.swing.JScrollBar;
+
 import backEnd.Account;
 import backEnd.Post;
 import javafx.scene.control.Label;
@@ -21,6 +23,7 @@ public class BulletinPane extends BorderPane {
 	ArrayList<PostHUD> postHUDs = new ArrayList<PostHUD>();
 	String username;
 	Label userlabel;
+	ScrollPane postScrollPane = new ScrollPane();
 	BulletinPane(String user, String file) {
 		username = user;
 		userlabel = new Label("Logged in as: "+username);
@@ -28,7 +31,7 @@ public class BulletinPane extends BorderPane {
 		// TODO replace with bullitenBoard stuff
 		postPane = new GridPane();
 		
-		ScrollPane postScrollPane = new ScrollPane();
+//		ScrollPane postScrollPane = new ScrollPane();
 		postScrollPane.setContent(postPane);
 		
 		TextField textAddField = new TextField();
@@ -43,15 +46,18 @@ public class BulletinPane extends BorderPane {
 		this.setCenter(postScrollPane);
 		this.setBottom(textAddField);
 		refreshScene(bb);
+		autoscroll(bb);
 	}
 	void createPost(Post input, bulletinboard bb) {
 		// creates new postHUD with displayIndex of the last postHUD
 		bb.addPost(input);
 		refreshScene(bb);
+		autoscroll(bb);
 	}
 	void removePost(Post input, bulletinboard bb) {
 		bb.deletePost(input, username);
 		refreshScene(bb);
+		autoscroll(bb);
 	}
 	void refreshScene(bulletinboard bb) {
 		bb.saveBulletin();
@@ -63,6 +69,9 @@ public class BulletinPane extends BorderPane {
 		for(int i=0; i<postHUDs.size(); i++) {
 			postPane.add(postHUDs.get(i), 0, i);
 		}
-		
+	}
+	void autoscroll(bulletinboard bb) {
+		postScrollPane.setVvalue(postScrollPane.getVmax());
+		postScrollPane.setHvalue(postScrollPane.getHmin());
 	}
 }
