@@ -9,13 +9,13 @@ import javafx.stage.Stage;
 public class PetBar extends Pane {
 	private Pet pet;
 	protected Button petButton;
-	protected PetPane petPane;
+	protected EditPetPane petPane;
 	protected Stage petStage;
 
 	PetBar(/* Account inputAccount, */ Pet inputPet) {
 		pet = inputPet;
 
-		petPane = new PetPane(pet);
+		petPane = new EditPetPane(pet);
 
 		// Text petName = new Text(pet.getName());
 

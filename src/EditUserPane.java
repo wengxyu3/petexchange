@@ -1,30 +1,28 @@
 package src;
 
-import backEnd.Pet;
-import backEnd.PetDisplayType;
+import backEnd.Account;
+import backEnd.UserDisplayType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
-public class PetPane extends BorderPane {
-	Pet pet;
+public class EditUserPane extends BorderPane {
+	Account account;
 	Text[] textArray;
 	TextField[] textFieldArray;
-	Button saveButton;
-	Button deleteButton;
 
-	PetPane(Pet inputPet) {
-		pet = inputPet;
+	EditUserPane(Account inputAccount) {
+		account = inputAccount;
 		GridPane informationPane = new GridPane();
 
-		textArray = new Text[PetDisplayType.length];
-		textFieldArray = new TextField[PetDisplayType.length];
+		textArray = new Text[UserDisplayType.length];
+		textFieldArray = new TextField[UserDisplayType.length];
 
-		for (PetDisplayType i : PetDisplayType.values()) {
+		for (UserDisplayType i : UserDisplayType.values()) {
 			textArray[i.returnIntValue()] = new Text(i.returnStringValue());
-			textFieldArray[i.returnIntValue()] = new TextField(pet.get(i));
+			textFieldArray[i.returnIntValue()] = new TextField(account.get(i));
 
 			informationPane.add(textArray[i.returnIntValue()], 0, i.returnIntValue() * 2);
 			informationPane.add(textFieldArray[i.returnIntValue()], 0, i.returnIntValue() * 2 + 1);
@@ -36,25 +34,22 @@ public class PetPane extends BorderPane {
 		resetButton.setOnAction(e -> reset());
 		buttonPane.add(resetButton, 1, 0);
 
-		saveButton = new Button("Save");
-		// saveButton.setOnAction(e -> save());
+		Button saveButton = new Button("Save");
+		saveButton.setOnAction(e -> save());
 		buttonPane.add(saveButton, 0, 0);
-
-		deleteButton = new Button("Delete");
-		buttonPane.add(deleteButton, 2, 0);
 
 		this.setCenter(informationPane);
 		this.setBottom(buttonPane);
 	}
 
 	void reset() {
-		for (PetDisplayType i : PetDisplayType.values())
-			textFieldArray[i.returnIntValue()].setText(pet.get(i));
+		for (UserDisplayType i : UserDisplayType.values())
+			textFieldArray[i.returnIntValue()].setText(account.get(i));
 	}
 
-//	void save() {
-//		for (PetDisplayType i : PetDisplayType.values())
-//			pet.edit(textFieldArray[i.returnIntValue()].getText(), i);
-//
-//	}
+	void save() {
+		for (UserDisplayType i : UserDisplayType.values())
+			account.edit(textFieldArray[i.returnIntValue()].getText(), i);
+	}
+
 }
