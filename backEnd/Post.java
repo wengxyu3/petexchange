@@ -8,15 +8,22 @@ public class Post {
 	private String postContent;
 	private boolean postDeleted;
 	private LocalDateTime postDate;
-	Post(){
-		
+
+	Post() {
+
 	}
+
 	public Post(long id1, String username1, String message1, LocalDateTime dateTime1) {
 		postId = id1;
 		postUsername = username1;
 		postContent = message1;
 		postDate = dateTime1;
 		postDeleted = false;
+	}
+
+	public void delete(boolean toSet, String username) {
+		if (username.equals(postUsername))
+			postDeleted = toSet;
 	}
 
 	public LocalDateTime getDateTime() {
@@ -42,13 +49,9 @@ public class Post {
 	protected void replyPost() {
 		// TODO
 	}
-	protected void setDeleteFlag(boolean toSet) {
+
+	public void setDeleteFlag(boolean toSet) {
 		postDeleted = toSet;
 	}
-	public void delete(boolean toSet, String username) {
-		if(username.equals(postUsername)){
-			postDeleted = toSet;
-		}
-	}
-	
+
 }
