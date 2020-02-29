@@ -42,22 +42,21 @@ public class BulletinPane extends BorderPane {
 				textAddField.clear();
 			}
 		});
+		postPane.heightProperty().addListener(observable -> postScrollPane.setVvalue(1D));
+		postPane.widthProperty().addListener(observable -> postScrollPane.setHvalue(0));
 		this.setTop(userlabel);
 		this.setCenter(postScrollPane);
 		this.setBottom(textAddField);
 		refreshScene(bb);
-		autoscroll(bb);
 	}
 	void createPost(Post input, bulletinboard bb) {
 		// creates new postHUD with displayIndex of the last postHUD
 		bb.addPost(input);
 		refreshScene(bb);
-		autoscroll(bb);
 	}
 	void removePost(Post input, bulletinboard bb) {
 		bb.deletePost(input, username);
 		refreshScene(bb);
-		autoscroll(bb);
 	}
 	void refreshScene(bulletinboard bb) {
 		bb.saveBulletin();
@@ -70,8 +69,5 @@ public class BulletinPane extends BorderPane {
 			postPane.add(postHUDs.get(i), 0, i);
 		}
 	}
-	void autoscroll(bulletinboard bb) {
-		postScrollPane.setVvalue(postScrollPane.getVmax());
-		postScrollPane.setHvalue(postScrollPane.getHmin());
-	}
+
 }
