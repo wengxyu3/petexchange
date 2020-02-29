@@ -14,7 +14,7 @@ public class PostTest extends Application {
 	public void start(Stage primaryStage) {
 		// TODO replace this with BulletinBoard
 //		Scene scene = new Scene(new UserPane(new Account()));
-		Scene scene = new Scene(new BulletinPane("abc", "testbulletinboard1"));
+		Scene scene = new Scene(new BulletinPane(new Account(), "testbulletinboard1"));
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
