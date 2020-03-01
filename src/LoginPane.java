@@ -49,7 +49,7 @@ public class LoginPane extends Pane {
 
 		textFieldPane.add(new Label("Username:"), 0, 0);
 		textFieldPane.add(usernameField, 1, 0);
-		textFieldPane.add(new Label("Password"), 0, 1);
+		textFieldPane.add(new Label("Password:"), 0, 1);
 		textFieldPane.add(passwordField, 1, 1);
 
 		// Create BorderPane to make button alignment less of a hassle
@@ -106,8 +106,8 @@ public class LoginPane extends Pane {
 	private void loginHandle(Event e, String username, String password) {
 		try {
 			Account loginAccount = new Account(username, password, false);
-			// TODO progress to next scene
-			BulletinPane chatRoom = new BulletinPane(loginAccount);
+			// TODO change to a better file name
+			MainPane chatRoom = new MainPane(loginAccount);
 			Scene chatRoomScene = new Scene(chatRoom);
 			Stage chatRoomStage = new Stage();
 			chatRoomStage.setScene(chatRoomScene);
