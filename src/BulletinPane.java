@@ -2,9 +2,6 @@ package src;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-
-import javax.swing.JScrollBar;
-
 import backEnd.Account;
 import backEnd.Post;
 import javafx.scene.control.Label;
@@ -13,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
 import backEnd.bulletinboard;
 
 public class BulletinPane extends BorderPane {
@@ -25,6 +23,7 @@ public class BulletinPane extends BorderPane {
 	Label userlabel;
 	ScrollPane postScrollPane = new ScrollPane();
 	BulletinPane(Account user, String file) {
+		
 		username = user.getUsername();
 		userlabel = new Label("Logged in as: "+username);
 		bulletinboard bb = new bulletinboard(file);
@@ -44,6 +43,8 @@ public class BulletinPane extends BorderPane {
 		});
 		postPane.heightProperty().addListener(observable -> postScrollPane.setVvalue(1D));
 		postPane.widthProperty().addListener(observable -> postScrollPane.setHvalue(0));
+//		GridPane.setHgrow(postPane, Priority.ALWAYS);
+		postPane.prefWidthProperty().bind(this.widthProperty());
 		this.setTop(userlabel);
 		this.setCenter(postScrollPane);
 		this.setBottom(textAddField);
@@ -58,7 +59,6 @@ public class BulletinPane extends BorderPane {
 		
 //		ScrollPane postScrollPane = new ScrollPane();
 		postScrollPane.setContent(postPane);
-		
 		TextField textAddField = new TextField();
 		textAddField.setOnKeyPressed(e -> {
 			if (e.getCode() == KeyCode.ENTER && !textAddField.getText().equals("")) {
@@ -67,6 +67,7 @@ public class BulletinPane extends BorderPane {
 				textAddField.clear();
 			}
 		});
+		postPane.prefWidthProperty().bind(this.widthProperty());
 		postPane.heightProperty().addListener(observable -> postScrollPane.setVvalue(1D));
 		postPane.widthProperty().addListener(observable -> postScrollPane.setHvalue(0));
 		this.setTop(userlabel);
@@ -94,5 +95,4 @@ public class BulletinPane extends BorderPane {
 			postPane.add(postHUDs.get(i), 0, i);
 		}
 	}
-
 }
