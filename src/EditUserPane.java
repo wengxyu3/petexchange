@@ -12,6 +12,7 @@ public class EditUserPane extends BorderPane {
 	Account account;
 	Text[] textArray;
 	TextField[] textFieldArray;
+	Button saveButton;
 
 	EditUserPane(Account inputAccount) {
 		account = inputAccount;
@@ -34,8 +35,8 @@ public class EditUserPane extends BorderPane {
 		resetButton.setOnAction(e -> reset());
 		buttonPane.add(resetButton, 1, 0);
 
-		Button saveButton = new Button("Save");
-		saveButton.setOnAction(e -> save());
+		saveButton = new Button("Save");
+		// saveButton.setOnAction(e -> save());
 		buttonPane.add(saveButton, 0, 0);
 
 		this.setCenter(informationPane);

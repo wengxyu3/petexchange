@@ -93,7 +93,12 @@ public class Account {
 	}
 
 	public void edit(String inputString, UserDisplayType displayType) {
-		String string = inputString.trim();
+		String string;
+		try {
+			string = inputString.trim();
+		} catch (NullPointerException e) {
+			string = "";
+		}
 		switch (displayType) {
 		case USERNAME:
 			editUsername(string);

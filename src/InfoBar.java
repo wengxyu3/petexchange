@@ -6,12 +6,15 @@ import backEnd.Account;
 import backEnd.NullPetNameException;
 import backEnd.Pet;
 import backEnd.PetDisplayType;
+import backEnd.UserDisplayType;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
 public class InfoBar extends BorderPane {
 	GridPane petPane;
@@ -59,6 +62,9 @@ public class InfoBar extends BorderPane {
 		ScrollPane scrollPetPane = new ScrollPane();
 		scrollPetPane.setContent(pane);
 		this.setCenter(scrollPetPane);
+
+		Button userBar = userSetup();
+		this.setBottom(userBar);
 	}
 
 	private void addPetBar(Pet inputPet) {
@@ -97,5 +103,25 @@ public class InfoBar extends BorderPane {
 		petBars.clear();
 		petPane.getChildren().clear();
 		petSetup();
+	}
+
+	private Button userSetup() {
+		Button userBar = new Button(account.get(UserDisplayType.USERNAME));
+		userBar.setOnAction(e -> {
+			EditUserPane userPane = new EditUserPane(account);
+
+			Scene scene = new Scene(userPane);
+			Stage userStage = new Stage();
+			userStage.setScene(scene);
+			userPane.saveButton.setOnAction(e1 -> {
+				userPane.save();
+				userStage.close();
+				this.setBottom(userSetup());
+			});
+
+			userStage.show();
+		});
+
+		return userBar;
 	}
 }
