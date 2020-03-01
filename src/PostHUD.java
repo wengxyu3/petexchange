@@ -42,7 +42,6 @@ public class PostHUD extends BorderPane {
 //		postText.setWrapText(true);
 //		postText.setPrefHeight(50);
 //		t.setWrappingWidth(500);
-		//TODO auto resizing using hgrow? Right now the text is cutting off
 		postText.setWrapText(true);
 		deleteButton = new Button("Delete");
 		deleteButton.setPrefWidth(60);
