@@ -9,11 +9,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
 public class EditPetPane extends BorderPane {
-	Pet pet;
+	protected Pet pet;
 	Text[] textArray;
 	TextField[] textFieldArray;
-	Button saveButton;
-	Button deleteButton;
+	protected Button saveButton;
+	protected Button deleteButton;
 
 	EditPetPane(Pet inputPet) {
 		pet = inputPet;
@@ -47,7 +47,7 @@ public class EditPetPane extends BorderPane {
 		this.setBottom(buttonPane);
 	}
 
-	void reset() {
+	private void reset() {
 		for (PetDisplayType i : PetDisplayType.values())
 			textFieldArray[i.returnIntValue()].setText(pet.get(i));
 	}

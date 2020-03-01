@@ -13,7 +13,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 
-public class InfoBar extends ScrollPane {
+public class InfoBar extends BorderPane {
 	GridPane petPane;
 	Account account;
 	ArrayList<PetBar> petBars = new ArrayList<>();
@@ -56,10 +56,12 @@ public class InfoBar extends ScrollPane {
 
 		pane.setBottom(addPetButton);
 
-		this.setContent(pane);
+		ScrollPane scrollPetPane = new ScrollPane();
+		scrollPetPane.setContent(pane);
+		this.setCenter(scrollPetPane);
 	}
 
-	void addPetBar(Pet inputPet) {
+	private void addPetBar(Pet inputPet) {
 		PetBar petBar = new PetBar(inputPet);
 		petBar.petPane.deleteButton.setOnAction(e -> {
 			account.deletePet(petBar.returnPet());
@@ -85,13 +87,13 @@ public class InfoBar extends ScrollPane {
 
 	}
 
-	void petSetup() {
+	private void petSetup() {
 		for (int i = 0; i < account.getPets().size(); i++)
 			addPetBar(account.getPets().get(i));
 
 	}
 
-	void petUpdate() {
+	private void petUpdate() {
 		petBars.clear();
 		petPane.getChildren().clear();
 		petSetup();
