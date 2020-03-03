@@ -25,6 +25,8 @@ public class LoginPane extends Pane {
 
 	OwnerList ownerList = new OwnerList("");
 	ArrayList<Account> accounts = new ArrayList<>();
+	TextField usernameField;
+	PasswordField passwordField;
 
 	LoginPane() {
 		// Create a pane and set its properties
@@ -35,8 +37,8 @@ public class LoginPane extends Pane {
 		textFieldPane.setVgap(5.5);
 
 		// Place nodes in the pane
-		TextField usernameField = new TextField();
-		PasswordField passwordField = new PasswordField();
+		usernameField = new TextField();
+		passwordField = new PasswordField();
 
 		usernameField.setOnKeyPressed(e -> {
 			if (e.getCode() == KeyCode.ENTER)
@@ -100,6 +102,7 @@ public class LoginPane extends Pane {
 			ErrorStage errorStage = new ErrorStage("This username is already taken.");
 			errorStage.show();
 		}
+		textFieldClear();
 
 	}
 
@@ -117,5 +120,11 @@ public class LoginPane extends Pane {
 
 			errorStage.show();
 		}
+		textFieldClear();
+	}
+
+	private void textFieldClear() {
+		usernameField.clear();
+		passwordField.clear();
 	}
 }
