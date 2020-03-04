@@ -82,7 +82,7 @@ public class InfoBar extends BorderPane {
 					petBar.petButton.setText(petBar.returnPet().getName());
 					petUpdate();
 				} catch (NullPetNameException e1) {
-					ErrorStage errorStage = new ErrorStage("This pet must have a name.");
+					PopUpStage errorStage = new PopUpStage("This pet must have a name.");
 					errorStage.show();
 				}
 
