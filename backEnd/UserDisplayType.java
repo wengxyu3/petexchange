@@ -6,7 +6,7 @@ public enum UserDisplayType {
 	ADRESS(4, "Adress"), CITY(5, "City"), STATE(6, "State"), ZIPCODE(7, "Zip Code"), PHONENUMBER(8, "Phone Number"),
 	CREDITNUMBER(9, "Credit Card Number");
 
-	public final static int length = 10;
+	public final static int length = UserDisplayType.values().length;
 	private int numberValue;
 	private String stringValue;
 
