@@ -92,6 +92,7 @@ public class BulletinPane extends BorderPane {
 			postHUDs.add(new PostHUD(bb.listPosts().get(i), username));
 		}
 		for(int i=0; i<postHUDs.size(); i++) {
+			postHUDs.get(i).deleteButton.setOnMouseClicked(e -> refreshScene(bb));
 			postPane.add(postHUDs.get(i), 0, i);
 		}
 	}
