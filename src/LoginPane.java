@@ -18,13 +18,14 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class LoginPane extends Pane {
 
 	OwnerList ownerList = new OwnerList("");
 	ArrayList<Account> accounts = new ArrayList<>();
+	TextField usernameField;
+	PasswordField passwordField;
 
 	LoginPane() {
 		// Create a pane and set its properties
@@ -35,8 +36,8 @@ public class LoginPane extends Pane {
 		textFieldPane.setVgap(5.5);
 
 		// Place nodes in the pane
-		TextField usernameField = new TextField();
-		PasswordField passwordField = new PasswordField();
+		usernameField = new TextField();
+		passwordField = new PasswordField();
 
 		usernameField.setOnKeyPressed(e -> {
 			if (e.getCode() == KeyCode.ENTER)
@@ -78,44 +79,36 @@ public class LoginPane extends Pane {
 	private void createAccountHandle(Event e, String username, String password) {
 
 		try {
-			BorderPane newAccountConfirmationPane = new BorderPane();
-			Scene newAccountConfirmationScene = new Scene(newAccountConfirmationPane);
-			Stage newAccountConfirmationStage = new Stage();
-
-			Text accountCreatedText = new Text(50, 50, "Account Created!");
-			Button newAccountConfirmationCloseButton = new Button("OK");
-
-			newAccountConfirmationPane.setTop(accountCreatedText);
-			newAccountConfirmationPane.setCenter(newAccountConfirmationCloseButton);
-
-			newAccountConfirmationStage.setScene(newAccountConfirmationScene);
+			PopUpStage newAccountConfirmationStage = new PopUpStage("Account Created!");
 			ownerList.Register(username, password);
 
 			newAccountConfirmationStage.show();
-			newAccountConfirmationCloseButton.setOnAction(e1 -> {
-
-				newAccountConfirmationStage.close();
-			});
 		} catch (FileExistsException e1) {
-			ErrorStage errorStage = new ErrorStage("This username is already taken.");
+			PopUpStage errorStage = new PopUpStage("This username is already taken.");
 			errorStage.show();
 		}
+		textFieldClear();
 
 	}
 
 	private void loginHandle(Event e, String username, String password) {
 		try {
 			Account loginAccount = new Account(username, password, false);
-			// TODO change to a better file name
 			MainPane chatRoom = new MainPane(loginAccount);
 			Scene chatRoomScene = new Scene(chatRoom);
 			Stage chatRoomStage = new Stage();
 			chatRoomStage.setScene(chatRoomScene);
 			chatRoomStage.show();
 		} catch (PasswordMismatchException e1) {
-			ErrorStage errorStage = new ErrorStage("Username/Password does not match.");
+			PopUpStage errorStage = new PopUpStage("Username/Password does not match.");
 
 			errorStage.show();
 		}
+		textFieldClear();
+	}
+
+	private void textFieldClear() {
+		usernameField.clear();
+		passwordField.clear();
 	}
 }

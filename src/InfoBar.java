@@ -6,14 +6,17 @@ import backEnd.Account;
 import backEnd.NullPetNameException;
 import backEnd.Pet;
 import backEnd.PetDisplayType;
+import backEnd.UserDisplayType;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
-public class InfoBar extends ScrollPane {
+public class InfoBar extends BorderPane {
 	GridPane petPane;
 	Account account;
 	ArrayList<PetBar> petBars = new ArrayList<>();
@@ -56,10 +59,15 @@ public class InfoBar extends ScrollPane {
 
 		pane.setBottom(addPetButton);
 
-		this.setContent(pane);
+		ScrollPane scrollPetPane = new ScrollPane();
+		scrollPetPane.setContent(pane);
+		this.setCenter(scrollPetPane);
+
+		Button userBar = userSetup();
+		this.setBottom(userBar);
 	}
 
-	void addPetBar(Pet inputPet) {
+	private void addPetBar(Pet inputPet) {
 		PetBar petBar = new PetBar(inputPet);
 		petBar.petPane.deleteButton.setOnAction(e -> {
 			account.deletePet(petBar.returnPet());
@@ -74,7 +82,7 @@ public class InfoBar extends ScrollPane {
 					petBar.petButton.setText(petBar.returnPet().getName());
 					petUpdate();
 				} catch (NullPetNameException e1) {
-					ErrorStage errorStage = new ErrorStage("This pet must have a name.");
+					PopUpStage errorStage = new PopUpStage("This pet must have a name.");
 					errorStage.show();
 				}
 
@@ -85,15 +93,35 @@ public class InfoBar extends ScrollPane {
 
 	}
 
-	void petSetup() {
+	private void petSetup() {
 		for (int i = 0; i < account.getPets().size(); i++)
 			addPetBar(account.getPets().get(i));
 
 	}
 
-	void petUpdate() {
+	private void petUpdate() {
 		petBars.clear();
 		petPane.getChildren().clear();
 		petSetup();
+	}
+
+	private Button userSetup() {
+		Button userBar = new Button(account.get(UserDisplayType.USERNAME));
+		userBar.setOnAction(e -> {
+			EditUserPane userPane = new EditUserPane(account);
+
+			Scene scene = new Scene(userPane);
+			Stage userStage = new Stage();
+			userStage.setScene(scene);
+			userPane.saveButton.setOnAction(e1 -> {
+				userPane.save();
+				userStage.close();
+				this.setBottom(userSetup());
+			});
+
+			userStage.show();
+		});
+
+		return userBar;
 	}
 }

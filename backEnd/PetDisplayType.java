@@ -4,7 +4,7 @@ public enum PetDisplayType {
 
 	NAME(0, "Name"), SPECIES(1, "Species"), DESCRIPTION(2, "Description");
 
-	public final static int length = 3;
+	public final static int length = PetDisplayType.values().length;
 	private int numberValue;
 	private String stringValue;
 
