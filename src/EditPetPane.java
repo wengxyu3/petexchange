@@ -3,14 +3,14 @@ package src;
 import backEnd.Pet;
 import backEnd.PetDisplayType;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.text.Text;
 
 public class EditPetPane extends BorderPane {
 	protected Pet pet;
-	Text[] textArray;
+	Label[] textArray;
 	TextField[] textFieldArray;
 	protected Button saveButton;
 	protected Button deleteButton;
@@ -19,11 +19,11 @@ public class EditPetPane extends BorderPane {
 		pet = inputPet;
 		GridPane informationPane = new GridPane();
 
-		textArray = new Text[PetDisplayType.length];
+		textArray = new Label[PetDisplayType.length];
 		textFieldArray = new TextField[PetDisplayType.length];
 
 		for (PetDisplayType i : PetDisplayType.values()) {
-			textArray[i.returnIntValue()] = new Text(i.returnStringValue());
+			textArray[i.returnIntValue()] = new Label(i.returnStringValue());
 			textFieldArray[i.returnIntValue()] = new TextField(pet.get(i));
 
 			informationPane.add(textArray[i.returnIntValue()], 0, i.returnIntValue() * 2);
