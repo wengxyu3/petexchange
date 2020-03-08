@@ -11,10 +11,11 @@ public class MainPane extends BorderPane {
 		account = inputAccount;
 		infoBar = new InfoBar(account);
 		this.setLeft(infoBar);
-		bullitenPaneSetup("test");
+		bulletinPaneSetup("test");
 	}
 
-	void bullitenPaneSetup(String fileName) {
+	void bulletinPaneSetup(String fileName) {
+//		this.setTop();
 		this.setCenter(new BulletinPane(account, fileName));
 	}
 }

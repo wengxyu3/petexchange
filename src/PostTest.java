@@ -1,6 +1,7 @@
 package src;
 
 import backEnd.Account;
+import backEnd.PasswordMismatchException;
 import backEnd.UserDisplayType;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -16,7 +17,14 @@ public class PostTest extends Application {
 		// TODO replace this with BulletinBoard
 //		Scene scene = new Scene(new UserPane(new Account()));
 //		Account account = new Account();
-		Scene scene = new Scene(new BulletinPane("abc", "testbulletinboard1"));
+		Scene scene = null;
+		try {
+			scene = new Scene(new MainPane(new Account("abc", "xxy", true)));
+		} catch (PasswordMismatchException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+//new BulletinPane("abc", "testbulletinboard1"));
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
