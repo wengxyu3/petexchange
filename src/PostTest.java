@@ -19,7 +19,7 @@ public class PostTest extends Application {
 //		Account account = new Account();
 		Scene scene = null;
 		try {
-			scene = new Scene(new MainPane(new Account("abc", "xxy", true)));
+			scene = new Scene(new MainPane(new Account("abc", "xxy", true),"testbulletinboard"));
 		} catch (PasswordMismatchException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

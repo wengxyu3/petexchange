@@ -7,11 +7,11 @@ public class MainPane extends BorderPane {
 	Account account;
 	InfoBar infoBar;
 
-	MainPane(Account inputAccount) {
+	MainPane(Account inputAccount, String fileName) {
 		account = inputAccount;
 		infoBar = new InfoBar(account);
 		this.setLeft(infoBar);
-		bulletinPaneSetup("test");
+		bulletinPaneSetup(fileName);
 	}
 
 	void bulletinPaneSetup(String fileName) {
