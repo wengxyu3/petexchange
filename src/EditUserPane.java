@@ -2,52 +2,35 @@ package src;
 
 import backEnd.Account;
 import backEnd.UserDisplayType;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 
-public class EditUserPane extends BorderPane {
+public class EditUserPane extends EditPane {
 	Account account;
-	Label[] textArray;
-	TextField[] textFieldArray;
-	Button saveButton;
 
 	EditUserPane(Account inputAccount) {
 		account = inputAccount;
-		GridPane informationPane = new GridPane();
+		setValues();
+	}
 
+	@Override
+	void getValues() {
 		textArray = new Label[UserDisplayType.length];
 		textFieldArray = new TextField[UserDisplayType.length];
 
 		for (UserDisplayType i : UserDisplayType.values()) {
 			textArray[i.returnIntValue()] = new Label(i.returnStringValue());
 			textFieldArray[i.returnIntValue()] = new TextField(account.get(i));
-
-			informationPane.add(textArray[i.returnIntValue()], 0, i.returnIntValue() * 2);
-			informationPane.add(textFieldArray[i.returnIntValue()], 0, i.returnIntValue() * 2 + 1);
 		}
-
-		GridPane buttonPane = new GridPane();
-
-		Button resetButton = new Button("Reset");
-		resetButton.setOnAction(e -> reset());
-		buttonPane.add(resetButton, 1, 0);
-
-		saveButton = new Button("Save");
-		// saveButton.setOnAction(e -> save());
-		buttonPane.add(saveButton, 0, 0);
-
-		this.setCenter(informationPane);
-		this.setBottom(buttonPane);
 	}
 
+	@Override
 	void reset() {
 		for (UserDisplayType i : UserDisplayType.values())
 			textFieldArray[i.returnIntValue()].setText(account.get(i));
 	}
 
+	@Override
 	void save() {
 		for (UserDisplayType i : UserDisplayType.values())
 			account.edit(textFieldArray[i.returnIntValue()].getText(), i);
