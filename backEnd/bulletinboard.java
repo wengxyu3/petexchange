@@ -10,11 +10,13 @@ import java.util.Scanner;
 
 public class bulletinboard{
 	public int postnumber = 0;
+	public String title="";
 	public ArrayList<Post> postcontents = new ArrayList<Post>();
 	// TODO make your post number visible on the GUI when viewing a thread
 	static File f1 = new File("");
 	public bulletinboard(String name) {
-		f1 = new File(name+".txt");
+		title= name;
+		f1 = new File("bulletinstorage/"+name+".txt");
 		if(f1.exists()) {
 			String holds1 = "";
 			try {
@@ -46,6 +48,7 @@ public class bulletinboard{
 			f1.createNewFile();
 		}
 		catch(java.io.IOException exception) {
+			exception.printStackTrace();
 			System.out.println("File could not be created at this time");
 			}
 		}
