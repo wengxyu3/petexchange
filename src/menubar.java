@@ -25,7 +25,7 @@ public class menubar extends MenuBar{
 					holding.bulletinPaneSetup(availablefiles.get(e));
 				}
 			});
-			this.getMenus().add(chatlist);
 		}
+		this.getMenus().add(chatlist);
 	}
 }

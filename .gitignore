@@ -1,9 +1,5 @@
 /bin/
-<<<<<<< HEAD
-*.dat
-*.txt
-=======
 *.txt
 *.dat
 .project
->>>>>>> branch 'master' of https://github.com/wengxyu3/petexchange
+.DS_Store
