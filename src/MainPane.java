@@ -20,6 +20,7 @@ public class MainPane extends BorderPane {
 	}
 
 	void bulletinPaneSetup(String fileName) {
+		fileName = fileName.substring(0, fileName.length());
 		bulletin = new BulletinPane(account, fileName);
 		this.setCenter(bulletin);
 	}

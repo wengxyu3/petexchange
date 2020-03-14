@@ -22,7 +22,7 @@ public class menubar extends MenuBar{
 			int e=i;
 			chatlist.getItems().get(i).setOnAction(new EventHandler<ActionEvent>() {
 				public void handle(ActionEvent t) {
-					holding.bulletinPaneSetup(availablefiles.get(e));
+					holding.bulletinPaneSetup(availablefiles.get(e).substring(0,availablefiles.get(e).length()-4));
 				}
 			});
 		}
